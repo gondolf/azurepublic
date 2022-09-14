@@ -1,12 +1,12 @@
 param (
-    [Parameter(Mandatory = $false)] [String]  $TenantId = "3617ef9b-98b4-40d9-ba43-e1ed6709cf0d",
-    [Parameter(Mandatory = $false)] [String]  $Subscriptionid = "964df7ca-3ba4-48b6-a695-1ed9db5723f8",
+    [Parameter(Mandatory = $false)] [String]  $TenantId = "78153f1a-b836-436b-b9bb-281f4fe2d1d0",
+    [Parameter(Mandatory = $false)] [String]  $Subscriptionid = "8bacf08c-ed66-4a7f-9c82-af1ce9a68cce",
     [Parameter(Mandatory = $false)] [String]  $ResourceGroupName = '1-99e8c8c0-playground-sandbox', # Only for Resourcegroup deployments
-    [Parameter(Mandatory = $false)] [String]  $WorkingDirectory = ".\singleadds\",
+    [Parameter(Mandatory = $false)] [String]  $WorkingDirectory = ".\templates\4 infrabase\",
     [Parameter(Mandatory = $false)] [string]  $TemplateFile = $WorkingDirectory + "\azuredeploy.json",
     [Parameter(Mandatory = $false)] [String]  $TemplateParameterFile = $WorkingDirectory + "\azuredeploy.parameters.json",
     [Parameter(Mandatory = $false)] [switch]  $SubscriptionDeployment ,
-    [Parameter(Mandatory = $false)] [string]  $Location = "centralus" ,
+    [Parameter(Mandatory = $false)] [string]  $Location = "eastus2" ,
     [Parameter(Mandatory = $false)] [switch]  $WhatIf 
 )
 
@@ -32,7 +32,15 @@ Login -SubscriptionId $SubscriptionId -TenantId $TenantId
 
 
 if ($SubscriptionDeployment) {
-    New-AzSubscriptionDeployment -Name 'SubscriptionDeployment' -Location $Location -TemplateFile $TemplateFile -TemplateParameterFile $TemplateParameterFile -DeploymentDebugLogLevel All
+    if ($WhatIf.IsPresent) {
+        Write-Output "Whatif $($true)"
+        New-AzSubscriptionDeployment -Name 'SubscriptionDeployment' -Location $Location -TemplateFile $TemplateFile -TemplateParameterFile $TemplateParameterFile -DeploymentDebugLogLevel All -WhatIf
+    
+    }
+    else {
+        Write-Output "whatIf $($false)"
+        New-AzSubscriptionDeployment -Name 'SubscriptionDeployment' -Location $Location -TemplateFile $TemplateFile -TemplateParameterFile $TemplateParameterFile -DeploymentDebugLogLevel All
+    }      
 }
 else {
     if ($WhatIf.IsPresent) {

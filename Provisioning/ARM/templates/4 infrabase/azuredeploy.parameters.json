@@ -4,16 +4,20 @@
     "parameters": {
         "appNames": {
             "value": [
-                "J6",
-                "SFC",
-                "ADD"
+                "app1",
+                "app2",
+                "app3"
             ]
         },
         "customer": {
-            "value": "ybo"
+            "value": "company"
         },
         "environment": {
-            "value": "prd01"
+            "value": [
+                "prd",
+                "qas",
+                "des"
+            ]
         }        
     }
 }

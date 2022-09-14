@@ -23,25 +23,106 @@
             }
         },
         "environment": {
-            "type": "string",
+            "type": "array",
             "defaultValue": "prd01"
-        }        
+        }
     },
     "variables": {
+        "location": "[parameters('location')]",
+        "arrayUnion": "[union(parameters('appNames'),parameters('environment'))]",
         "rgprefix": "arsgr",
+        "rgNameArray": {
+
+        },
         "copy": [
             {
-                "name": "rgName",
-                "input": "[toLower(concat(variables('rgprefix'),parameters('customer'),parameters('appNames')[copyIndex('rgName')],parameters('location'),parameters('environment')))]",
-                "count": "[length(parameters('appNames'))]"
+                "name": "rgName0",
+                "count": "[length(parameters('appNames'))]",
+                "input": "[toLower(concat(variables('rgprefix'),parameters('customer'),parameters('appNames')[copyIndex('rgName0')],parameters('location'),parameters('environment')[0]))]"
+
+            },
+            {
+                "name": "rgName1",
+                "count": "[length(parameters('appNames'))]",
+                "input": "[toLower(concat(variables('rgprefix'),parameters('customer'),parameters('appNames')[copyIndex('rgName1')],parameters('location'),parameters('environment')[1]))]"
+
+            },
+            {
+                "name": "rgName2",
+                "count": "[length(parameters('appNames'))]",
+                "input": "[toLower(concat(variables('rgprefix'),parameters('customer'),parameters('appNames')[copyIndex('rgName2')],parameters('location'),parameters('environment')[2]))]"
+
             }
         ]
     },
+
     "resources": [
+        {
+            "name": "nestedDeployment1",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2021-04-01",
+            "location": "[parameters('location')]",
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {},
+                    "variables": {},
+                    "resources": [
+                        {
+                            "type": "Microsoft.Resources/resourceGroups",
+                            "apiVersion": "2020-06-01",
+                            "name": "[concat(parameters('customer'),'infra')]",
+                            "location": "[deployment().location]",
+                            "tags": {
+                                "Note": "subscription level deployment"
+                            },
+                            "dependsOn": [
+                            ],
+                            "properties": {}
+                        }
+                    ],
+                    "outputs": {}
+                }
+            }
+        },
         {
             "type": "Microsoft.Resources/resourceGroups",
             "apiVersion": "2020-06-01",
-            "name": "[variables('rgName')[copyIndex()]]",
+            "name": "[variables('rgName0')[copyIndex()]]",
+            "location": "[parameters('Location')]",
+            "copy": {
+                "name": "rgloop",
+                "count": "[length(parameters('appNames'))]"
+            },
+            "tags": {
+                "Note": "subscription level deployment"
+            },
+            "dependsOn": [
+            ],
+            "properties": {}
+        },
+        {
+            "type": "Microsoft.Resources/resourceGroups",
+            "apiVersion": "2020-06-01",
+            "name": "[variables('rgName1')[copyIndex()]]",
+            "location": "[parameters('Location')]",
+            "copy": {
+                "name": "rgloop",
+                "count": "[length(parameters('appNames'))]"
+            },
+            "tags": {
+                "Note": "subscription level deployment"
+            },
+            "dependsOn": [
+            ],
+            "properties": {}
+        },
+        {
+            "type": "Microsoft.Resources/resourceGroups",
+            "apiVersion": "2020-06-01",
+            "name": "[variables('rgName2')[copyIndex()]]",
             "location": "[parameters('Location')]",
             "copy": {
                 "name": "rgloop",
@@ -56,6 +137,26 @@
         }
     ],
     "outputs": {
-
+        "resourceGroups1": {
+            "type": "array",
+            "copy": {
+                "count": "[length(variables('rgName1'))]",
+                "input": "[toLower(variables('rgName1')[copyIndex()])]"
+            }
+        },
+        "resourceGroups2": {
+            "type": "array",
+            "copy": {
+                "count": "[length(variables('rgName2'))]",
+                "input": "[toLower(variables('rgName2')[copyIndex()])]"
+            }
+        },
+        "resourceGroups3": {
+            "type": "array",
+            "copy": {
+                "count": "[length(variables('rgName2'))]",
+                "input": "[toLower(variables('rgName2')[copyIndex()])]"
+            }
+        }
     }
 }
