@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "VMName": { 
+      "value": [
+        "j6-tst-sql1-ec",
+        "j6-tst-sql2-ec"
+      ]
+    },
+    "adminUsername": {
+      "value": "kndadmin"
+    },
+    "existingvirtualNetworkName": {
+      "value": "avnetyeceu1prd01"
+    },
+    "existingresourcegroupVirtualNetwork": {
+      "value": "arsgrinfeu1p01"
+    },
+    "existingsubnetName": {
+      "value": "asnetdatprd01"
+    },
+    "existingBootDiagnostic": {
+      "value": "vdiagyecj6eu1prd01"
+    },
+    "adminPasswordOrKey": {
+      "value": "DY3ytqZ3wmiCLJh7"
+    },
+    "diskType": {
+      "value": "Premium_LRS"
+    },
+    "vmSize": {
+      "value": "Standard_D2as_v4"
+    },
+    "DataDiskSize": {
+      "value": 128
+    },
+    "AvailabilitySetName": {
+      "value": "avsetyecdj6prd02"
+    }
+  }
+}

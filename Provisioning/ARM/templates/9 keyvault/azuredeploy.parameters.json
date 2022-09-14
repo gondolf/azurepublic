@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "customer": {
+            "value": "gee"
+        },
+        "environment": {
+            "value": "prd"
+        },        
+        "keyVaultSuffix": {
+            "value": "inf"
+        },
+        "objectId": {
+            "value": "0fba5b91-07fb-46ba-ab04-a60930ca66df"
+        },
+        "secretName": {
+            "value": "kndadmin"
+        },
+        "secretValue": {
+            "value": "SecureThisString$999"
+        }
+    }
+}

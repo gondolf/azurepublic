@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "VMName": {
+      "value":   "test01"
+    },
+    "adminUsername": {
+      "value": "azureuser"
+    },
+    "existingvirtualNetworkName": {
+      "value": "vnettest01"
+    },
+    "existingresourcegroupVirtualNetwork": {
+      "value": "asrgrvpntest01"
+    },
+    "existingsubnetName": {
+      "value": "subnet1"
+    },
+    "existingBootDiagnostic": {
+      "value": "vdiagasrgrwin01"
+    },
+    "adminPasswordOrKey": {
+      "value": "P@ssw0rd123"
+    },
+    "diskType": {
+      "value": "StandardSSD_LRS"
+    },
+    "vmSize": {
+      "value": "Standard_B1s"
+    },
+    "networkaccelerate": {
+      "value": "false"
+    },
+    "DataDiskSize": {
+      "value": 32
+    }
+  }
+}

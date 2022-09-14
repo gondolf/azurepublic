@@ -1,0 +1,1664 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "CustomerID": {
+            "defaultValue": "Cloud",
+            "type": "String"
+        },
+        "actionGroups_agkndtest_name": {
+            "defaultValue": "agkndtest",
+            "type": "String"
+        },
+        "actionGroups_agkndcloud_name": {
+            "defaultValue": "agkndcloud",
+            "type": "String"
+        },
+        "actionGroups_agkndnetcool_name": {
+            "defaultValue": "agkndnetcool",
+            "type": "String"
+        },
+        "workspaces_loganyecinfprd01_name": {
+            "defaultValue": "logandemomon01",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_DESYNC_SQL_NETCOOLWEBHOOK_name": {
+            "defaultValue": "UNQ_LOGALERTV2_FATAL_DESYNC_SQL_NETCOOLWEBHOOK",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SQL_BACKUP_NETCOOLWEBHOOK_name": {
+            "defaultValue": "UNQ_LOGALERTV2_FATAL_SQL_BACKUP_NETCOOLWEBHOOK",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_WINDOWS_BACKUP_NETCOOLWEBHOOK_name": {
+            "defaultValue": "UNQ_LOGALERTV2_FATAL_WINDOWS_BACKUP_NETCOOLWEBHOOK",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_SERVICES_SQL_NETCOOLWEBHOOK_name": {
+            "defaultValue": "UNQ_LOGALERTV2_CRITICAL_SERVICES_SQL_NETCOOLWEBHOOK",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SQL_BACKUP_NETCOOLWEBHOOK_TEST_name": {
+            "defaultValue": "UNQ_LOGALERTV2_FATAL_SQL_BACKUP_NETCOOLWEBHOOK_TEST",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SQL_ERRORLOG_NETCOOLWEBHOOK_TEST_name": {
+            "defaultValue": "UNQ_LOGALERTV2_FATAL_SQL_ERRORLOG_NETCOOLWEBHOOK_TEST",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_WINDOWS_BACKUP_NETCOOLWEBHOOK_TEST_name": {
+            "defaultValue": "UNQ_LOGALERTV2_FATAL_WINDOWS_BACKUP_NETCOOLWEBHOOK_TEST",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_WARNING_SQL_ERRORLOG_NETCOOLWEBHOOK_TEST_name": {
+            "defaultValue": "UNQ_LOGALERTV2_WARNING_SQL_ERRORLOG_NETCOOLWEBHOOK_TEST",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_MEMORY_PERCENTAGE_NETCOOLWEBHOOK_name": {
+            "defaultValue": "UNQ_LOGALERTV2_CRITICAL_MEMORY_PERCENTAGE_NETCOOLWEBHOOK",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_SQL_ERRORLOG_NETCOOLWEBHOOK_TEST_name": {
+            "defaultValue": "UNQ_LOGALERTV2_CRITICAL_SQL_ERRORLOG_NETCOOLWEBHOOK_TEST",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_WARNING_SQL_DEADLOCKS_NETCOOLWEBHOOK_TEST_name": {
+            "defaultValue": "UNQ_LOGALERTV2_WARNING_SQL_DEADLOCKS_NETCOOLWEBHOOK_TEST",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_WARNING_TCPIP_WINDOWS_NETCOOLWEBHOOK_TEST_name": {
+            "defaultValue": "UNQ_LOGALERTV2_WARNING_TCPIP_WINDOWS_NETCOOLWEBHOOK_TEST",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_HEARTBEAT_UPANDOWN_NETCOOLWEBHOOK_name": {
+            "defaultValue": "UNQ_LOGALERTV2_CRITICAL_HEARTBEAT_UPANDOWN_NETCOOLWEBHOOK",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SHUTDOWN_WINDOWS_NETCOOLWEBHOOK_TEST_name": {
+            "defaultValue": "UNQ_LOGALERTV2_FATAL_SHUTDOWN_WINDOWS_NETCOOLWEBHOOK_TEST",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_WINDOWS_SERVICES_NETCOOLWEBHOOK_TEST_name": {
+            "defaultValue": "UNQ_LOGALERTV2_FATAL_WINDOWS_SERVICES_NETCOOLWEBHOOK_TEST",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_SQL_CONNECTION_NETCOOLWEBHOOK_TEST_name": {
+            "defaultValue": "UNQ_LOGALERTV2_CRITICAL_SQL_CONNECTION_NETCOOLWEBHOOK_TEST",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SQL_ALLOCATESPACE_NETCOOLWEBHOOK_TEST_name": {
+            "defaultValue": "UNQ_LOGALERTV2_FATAL_SQL_ALLOCATESPACE_NETCOOLWEBHOOK_TEST",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_FAILOVER_CLUSTER_NETCOOLWEBHOOK_TEST_name": {
+            "defaultValue": "UNQ_LOGALERTV2_CRITICAL_FAILOVER_CLUSTER_NETCOOLWEBHOOK_TEST",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_WINDOWS_SERVICES_NETCOOLWEBHOOK_TEST_name": {
+            "defaultValue": "UNQ_LOGALERTV2_CRITICAL_WINDOWS_SERVICES_NETCOOLWEBHOOK_TEST",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_DISKVOLC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name": {
+            "defaultValue": "UNQ_LOGALERTV2_FATAL_DISKVOLC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_WARNING_PAGINGFILE_PERCENTAGEUSAGE_NETCOOLWEBHOOK_name": {
+            "defaultValue": "UNQ_LOGALERTV2_WARNING_PAGINGFILE_PERCENTAGEUSAGE_NETCOOLWEBHOOK",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_SQL_DEADLOCKSPERSECOND_NETCOOLWEBHOOK_TEST_name": {
+            "defaultValue": "UNQ_LOGALERTV2_CRITICAL_SQL_DEADLOCKSPERSECOND_NETCOOLWEBHOOK_TEST",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_WARNING_DISKVOLC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name": {
+            "defaultValue": "UNQ_LOGALERTV2_WARNING_DISKVOLC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_DISKVOLC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name": {
+            "defaultValue": "UNQ_LOGALERTV2_CRITICAL_DISKVOLC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_DISKVOLNONC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name": {
+            "defaultValue": "UNQ_LOGALERTV2_FATAL_DISKVOLNONC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_WARNING_DISKVOLNONC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name": {
+            "defaultValue": "UNQ_LOGALERTV2_WARNING_DISKVOLNONC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_DISKVOLNONC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name": {
+            "defaultValue": "UNQ_LOGALERTV2_CRITICAL_DISKVOLNONC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_PLATFORM_FATAL_CPU_PERCENTAGE_NETCOOLWEBHOOK_name": {
+            "defaultValue": "UNQ_PLATFORM_FATAL_CPU_PERCENTAGE_NETCOOLWEBHOOK",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_PLATFORM_WARNING_CPU_PERCENTAGE_NETCOOLWEBHOOK_name": {
+            "defaultValue": "UNQ_PLATFORM_WARNING_CPU_PERCENTAGE_NETCOOLWEBHOOK",
+            "type": "String"
+        },
+        "scheduledqueryrules_UNQ_PLATFORM_CRITICAL_CPU_PERCENTAGE_NETCOOLWEBHOOK_name": {
+            "defaultValue": "UNQ_PLATFORM_CRITICAL_CPU_PERCENTAGE_NETCOOLWEBHOOK",
+            "type": "String"
+        },        
+        "workspaces_loganalytics": {
+            "defaultValue": "",
+            "type": "string"
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources. If no location is specified the deployment will use the resource group location"
+            }
+        },
+        "numberOfEvaluationPeriods": {
+            "type": "int",
+            "defaultValue": 1,
+            "metadata": {
+                "description": "The number of periods to check in the alert evaluation."
+            }
+        },
+        "minFailingPeriodsToAlert": {
+            "type": "int",
+            "defaultValue": 1,
+            "metadata": {
+                "description": "The number of unhealthy periods to alert on (must be lower or equal to numberOfEvaluationPeriods)."
+            }
+        },
+        "windowSize": {
+            "type": "string",
+            "defaultValue": "PT15M",
+            "allowedValues": [
+                "PT1M",
+                "PT5M",
+                "PT15M",
+                "PT30M",
+                "PT1H",
+                "PT6H",
+                "PT12H",
+                "PT24H"
+            ],
+            "metadata": {
+                "description": "Period of time used to monitor alert activity based on the threshold. Must be between one minute and one day. ISO 8601 duration format."
+            }
+        }
+    },
+    "variables": {
+        "loganalyticsID": "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+    },
+    "resources": [
+        {
+            "type": "microsoft.insights/actionGroups",
+            "apiVersion": "2022-06-01",
+            "name": "[parameters('actionGroups_agkndnetcool_name')]",
+            "location": "Global",
+            "properties": {
+                "groupShortName": "[parameters('actionGroups_agkndnetcool_name')]",
+                "enabled": true,
+                "emailReceivers": [],
+                "smsReceivers": [],
+                "webhookReceivers": [
+                    {
+                        "name": "Netcool",
+                        "serviceUri": "https://netcool.ibmaiops.com/",
+                        "useCommonAlertSchema": true,
+                        "useAadAuth": false
+                    }
+                ],
+                "eventHubReceivers": [],
+                "itsmReceivers": [],
+                "azureAppPushReceivers": [],
+                "automationRunbookReceivers": [],
+                "voiceReceivers": [],
+                "logicAppReceivers": [],
+                "azureFunctionReceivers": [],
+                "armRoleReceivers": []
+            }
+        },
+        {
+            "type": "microsoft.insights/actionGroups",
+            "apiVersion": "2022-06-01",
+            "name": "[parameters('actionGroups_agkndtest_name')]",
+            "location": "Global",
+            "properties": {
+                "groupShortName": "[parameters('actionGroups_agkndtest_name')]",
+                "enabled": true,
+                "emailReceivers": [],
+                "smsReceivers": [],
+                "webhookReceivers": [],
+                "eventHubReceivers": [],
+                "itsmReceivers": [],
+                "azureAppPushReceivers": [],
+                "automationRunbookReceivers": [],
+                "voiceReceivers": [],
+                "logicAppReceivers": [],
+                "azureFunctionReceivers": [],
+                "armRoleReceivers": []
+            }
+        },
+        {
+            "type": "microsoft.insights/actionGroups",
+            "apiVersion": "2022-06-01",
+            "name": "[parameters('actionGroups_agkndcloud_name')]",
+            "location": "Global",
+            "properties": {
+                "groupShortName": "Cloud Alerts",
+                "enabled": true,
+                "emailReceivers": [
+                    {
+                        "name": "Gonzalo Escajadillo_-EmailAction-",
+                        "emailAddress": "gonzalo.adolfo.escajadillo@kyndryl.com",
+                        "useCommonAlertSchema": true
+                    },
+                    {
+                        "name": "Arturo Alvarez_-EmailAction-",
+                        "emailAddress": "amalvare@kyndryl.com",
+                        "useCommonAlertSchema": true
+                    },
+                    {
+                        "name": "Richard Campos_-EmailAction-",
+                        "emailAddress": "rjcampos@kyndryl.com",
+                        "useCommonAlertSchema": true
+                    },
+                    {
+                        "name": "kyndryl operaciones_-EmailAction-",
+                        "emailAddress": "kyndryl.opera@kyndryl.com",
+                        "useCommonAlertSchema": false
+                    },
+                    {
+                        "name": "Gary Caviedes_-EmailAction-",
+                        "emailAddress": "gcaviedes@kyndryl.com",
+                        "useCommonAlertSchema": false
+                    },
+                    {
+                        "name": "Efrain Perez_-EmailAction-",
+                        "emailAddress": "eperez@kyndryl.com",
+                        "useCommonAlertSchema": false
+                    },
+                    {
+                        "name": "Carlos Arbulu_-EmailAction-",
+                        "emailAddress": "carlos.arbulu.vera@kyndryl.com",
+                        "useCommonAlertSchema": false
+                    },
+                    {
+                        "name": "Angel Flores_-EmailAction-",
+                        "emailAddress": "acflorez@kyndryl.com",
+                        "useCommonAlertSchema": false
+                    },
+                    {
+                        "name": "Arturo Mauri_-EmailAction-",
+                        "emailAddress": "arturo.mauri@kyndryl.com",
+                        "useCommonAlertSchema": false
+                    },
+                    {
+                        "name": "Illiet Miranda_-EmailAction-",
+                        "emailAddress": "illiett.miranda1@kyndryl.com",
+                        "useCommonAlertSchema": false
+                    },
+                    {
+                        "name": "Frank Alegria_-EmailAction-",
+                        "emailAddress": "frank.alegria.lermo@kyndryl.com",
+                        "useCommonAlertSchema": false
+                    },
+                    {
+                        "name": "Antonio Alvarado_-EmailAction-",
+                        "emailAddress": "antonio.alvarado@kyndryl.com",
+                        "useCommonAlertSchema": false
+                    }
+                ],
+                "smsReceivers": [],
+                "webhookReceivers": [],
+                "eventHubReceivers": [],
+                "itsmReceivers": [],
+                "azureAppPushReceivers": [],
+                "automationRunbookReceivers": [],
+                "voiceReceivers": [],
+                "logicAppReceivers": [],
+                "azureFunctionReceivers": [],
+                "armRoleReceivers": []
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_FAILOVER_CLUSTER_NETCOOLWEBHOOK_TEST_name')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_FAILOVER_CLUSTER_NETCOOLWEBHOOK_TEST_name')]",
+                "description": "Clustered role 'AG-J6-ECU' is moving from cluster node - Failover",
+                "severity": 1,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "windowSize": "PT15M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "Event\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| where EventID == 1641\n| project TimeGenerated, LocalTime, EventLog, Computer, UserName, RenderedDescription",
+                            "timeAggregation": "Count",
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "autoMitigate": false
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_DISKVOLC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_DISKVOLC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name')]",
+                "description": "Free disk space at Disk C is between Threshold >=97 and < 99",
+                "severity": 1,
+                "enabled": true,
+                "evaluationFrequency": "PT15M",
+                "windowSize": "[parameters('windowSize')]",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "InsightsMetrics\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| where Namespace == \"LogicalDisk\" and Name == \"FreeSpacePercentage\" and Computer !contains \"-dec-\" and Computer !contains \"-uat-\"\n| extend Disk=tostring(todynamic(Tags)[\"vm.azm.ms/mountId\"])\n| where Disk == \"C:\"\n| extend UsedDiskPercentage = 100 - Val\n| top-nested of Computer by dummy0=max(1),\n  top-nested 1 of TimeGenerated by dummy1=max(TimeGenerated),\n  top-nested 1 of LocalTime by dummy2=max(LocalTime),\n  top-nested of Disk by dummy3=max(1),\n  top-nested 1 of UsedDiskPercentage by dummy4=max(1)\n| summarize AggregatedValue = avg(UsedDiskPercentage) by Computer , bin (TimeGenerated,15m), Disk, UsedDiskPercentage, LocalTime\n| where AggregatedValue >= 97 and AggregatedValue < 99 // Considerar espacio libre de 97  a 99",
+                            "timeAggregation": "Average",
+                            "metricMeasureColumn": "AggregatedValue",
+                            "dimensions": [
+                                {
+                                    "name": "Computer",
+                                    "operator": "Include",
+                                    "values": [
+                                        "*"
+                                    ]
+                                }
+                            ],
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": "[parameters('numberOfEvaluationPeriods')]",
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_DISKVOLNONC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_DISKVOLNONC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name')]",
+                "description": "Free disk space at Disk NonC is between Threshold >=97 and < 99",
+                "severity": 1,
+                "enabled": true,
+                "evaluationFrequency": "PT15M",
+                "windowSize": "[parameters('windowSize')]",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "InsightsMetrics\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| where Namespace == \"LogicalDisk\" and Name == \"FreeSpacePercentage\" and Computer !contains \"-dec-\" and Computer !contains \"-uat-\"\n| extend Disk=tostring(todynamic(Tags)[\"vm.azm.ms/mountId\"])\n| where Disk != \"C:\"\n| extend UsedDiskPercentage = 100 - Val\n| top-nested of Computer by dummy0=max(1),\n  top-nested 1 of TimeGenerated by dummy1=max(TimeGenerated),\n  top-nested 1 of LocalTime by dummy2=max(LocalTime),\n  top-nested of Disk by dummy3=max(1),\n  top-nested 1 of UsedDiskPercentage by dummy4=max(1)\n| summarize AggregatedValue = avg(UsedDiskPercentage) by Computer , bin (TimeGenerated,15m), Disk, UsedDiskPercentage, LocalTime\n| where AggregatedValue >= 97 and AggregatedValue < 99 // Considerar espacio libre de 97  a 99\n",
+                            "timeAggregation": "Average",
+                            "metricMeasureColumn": "AggregatedValue",
+                            "dimensions": [
+                                {
+                                    "name": "Computer",
+                                    "operator": "Include",
+                                    "values": [
+                                        "*"
+                                    ]
+                                }
+                            ],
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": "[parameters('numberOfEvaluationPeriods')]",
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_HEARTBEAT_UPANDOWN_NETCOOLWEBHOOK_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_HEARTBEAT_UPANDOWN_NETCOOLWEBHOOK_name')]",
+                "description": "VM Computer hearbeat did not response since 5 minutes ago",
+                "severity": 1,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "windowSize": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "Heartbeat\n| where ResourceGroup matches regex \"p0.\"\n| summarize TimeGenerated=max(TimeGenerated) by Computer\n| extend Duration = datetime_diff('second',now(),TimeGenerated)\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| summarize AggregatedValue = max(Duration) by Computer, bin(TimeGenerated,5m) , LocalTime\n| where AggregatedValue >= 300 // tiempo expresado en seg equivalente a 5min",
+                            "timeAggregation": "Average",
+                            "metricMeasureColumn": "AggregatedValue",
+                            "dimensions": [
+                                {
+                                    "name": "Computer",
+                                    "operator": "Include",
+                                    "values": [
+                                        "*"
+                                    ]
+                                }
+                            ],
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": "[parameters('numberOfEvaluationPeriods')]",
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_MEMORY_PERCENTAGE_NETCOOLWEBHOOK_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_MEMORY_PERCENTAGE_NETCOOLWEBHOOK_name')]",
+                "description": "Available memory is too low <= 4%",
+                "severity": 1,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "windowSize": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "InsightsMetrics\n| extend LocalTime = TimeGenerated - 5h // convert UTC to LocalTime\n| where Origin == \"vm.azm.ms\"\n| where Namespace == \"Memory\" and Name == \"AvailableMB\"  and Computer !contains \"-uat-\" and Computer !contains \"-dec-\"\n| extend TotalMemory = toreal(todynamic(Tags)[\"vm.azm.ms/memorySizeMB\"])\n| extend AvailableMemoryPercentage = (toreal(Val) / TotalMemory) * 100.0\n| top-nested of Computer by dummy0=max(1),\n  top-nested 1 of TimeGenerated by dummy1=max(TimeGenerated),\n  top-nested 1 of LocalTime by dummy2=max(LocalTime),\n  top-nested of TotalMemory by dummy3=max(1),\n  top-nested 1 of AvailableMemoryPercentage by dummy4=max(1)\n| summarize AggregatedValue = avg(AvailableMemoryPercentage) by bin(TimeGenerated, 5m), Computer, LocalTime, TotalMemory",
+                            "timeAggregation": "Average",
+                            "metricMeasureColumn": "AggregatedValue",
+                            "dimensions": [
+                                {
+                                    "name": "Computer",
+                                    "operator": "Include",
+                                    "values": [
+                                        "*"
+                                    ]
+                                }
+                            ],
+                            "operator": "LessThanOrEqual",
+                            "threshold": 3,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": "[parameters('numberOfEvaluationPeriods')]",
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_SERVICES_SQL_NETCOOLWEBHOOK_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_SERVICES_SQL_NETCOOLWEBHOOK_name')]",
+                "description": "The SQL Server or SQL Server Agent services are not running",
+                "severity": 1,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "windowSize": "PT15M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "Event\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| where EventLog == \"System\" and Source == \"Service Control Manager\" and Computer !contains \"-dec-\" and Computer !contains \"-uat-\"\n| parse kind=relaxed EventData with * '<Data Name=\"param1\">' Windows_Service_Name '</Data><Data Name=\"param2\">' Windows_Service_State '</Data>'*\n| where Windows_Service_Name contains \"SQL Server (\" or Windows_Service_Name contains \"SQL Server Agent\"\n| where Windows_Service_State != \"running\"\n| project TimeGenerated, LocalTime, Computer, EventID, EventLog, Windows_Service_Name, Windows_Service_State",
+                            "timeAggregation": "Count",
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_SQL_CONNECTION_NETCOOLWEBHOOK_TEST_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_SQL_CONNECTION_NETCOOLWEBHOOK_TEST_name')]",
+                "description": "A SQL Error Connection event has been logged with Event ID 16804 or 17809",
+                "severity": 1,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "windowSize": "PT10M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "Event\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| where EventLog == \"Application\" and Source == \"MSSQLSERVER\" and Computer !contains \"-dec-\" and Computer !contains \"-uat-\"\n| where EventID == 16804  or EventID == 17809\n| project TimeGenerated, LocalTime, Source , Computer , EventID, RenderedDescription, UserName",
+                            "timeAggregation": "Count",
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_SQL_DEADLOCKSPERSECOND_NETCOOLWEBHOOK_TEST_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_SQL_DEADLOCKSPERSECOND_NETCOOLWEBHOOK_TEST_name')]",
+                "description": "MS SQL Server Deadlocks per Second is above > 0",
+                "severity": 1,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "windowSize": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "Perf\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| where CounterName == \"Number of Deadlocks/sec\" and InstanceName == \"_Total\"\n//| where TimeGenerated > ago(90d)\n| summarize AggregatedValue  = max(CounterValue) by bin(TimeGenerated, 5m), Computer, InstanceName, LocalTime\n| where AggregatedValue > 0.0\n| render timechart \n",
+                            "timeAggregation": "Average",
+                            "metricMeasureColumn": "AggregatedValue",
+                            "dimensions": [
+                                {
+                                    "name": "Computer",
+                                    "operator": "Include",
+                                    "values": [
+                                        "*"
+                                    ]
+                                }
+                            ],
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": "[parameters('numberOfEvaluationPeriods')]",
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_SQL_ERRORLOG_NETCOOLWEBHOOK_TEST_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_SQL_ERRORLOG_NETCOOLWEBHOOK_TEST_name')]",
+                "description": "A SQL ErrorLog event has been logged with Event Id 5069",
+                "severity": 1,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "windowSize": "PT10M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "Event\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| where EventLog == \"Application\" and Source == \"MSSQLSERVER\" and Computer !contains \"-dec-\" and Computer !contains \"-uat-\"\n| where EventID == 5069\n| project TimeGenerated, LocalTime, Source , Computer , EventID, RenderedDescription, UserName",
+                            "timeAggregation": "Count",
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_WINDOWS_SERVICES_NETCOOLWEBHOOK_TEST_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_WINDOWS_SERVICES_NETCOOLWEBHOOK_TEST_name')]",
+                "description": "One or more Windows Services are not running: \nFile Replication , Distributed Transaction, Distributed Link, Remote Procedure Call, IPsec, Windows Event Notification y DHCP Server",
+                "severity": 1,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "windowSize": "PT10M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "Event\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| where EventLog == \"System\" and Source == \"Service Control Manager\" and Computer !contains \"-dec-\" and Computer !contains \"-uat-\"\n| parse kind=relaxed EventData with * '<Data Name=\"param1\">' Windows_Service_Name '</Data><Data Name=\"param2\">' Windows_Service_State '</Data>'*\n| where Windows_Service_Name contains \"DNS\" or Windows_Service_Name contains \"Windows Event Log\" or Windows_Service_Name contains \"User Profile\" or Windows_Service_Name contains \"Kerberos Key\" or Windows_Service_Name contains \"File Replication\" or Windows_Service_Name contains \"Distributed Transaction\" or Windows_Service_Name contains \"Distributed Link\" or Windows_Service_Name contains \"Remote Procedure Call\" or Windows_Service_Name contains \"IPsec\" or Windows_Service_Name contains \"Windows Event Notification\" or Windows_Service_Name contains \"DHCP Server\"\n| where Windows_Service_State != \"running\"\n| project TimeGenerated, LocalTime,Computer, EventID, UserName,Windows_Service_Name, Windows_Service_State, RenderedDescription",
+                            "timeAggregation": "Count",
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_DESYNC_SQL_NETCOOLWEBHOOK_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_DESYNC_SQL_NETCOOLWEBHOOK_name')]",
+                "description": "DESYNC SQL Queue is above >= 2GB",
+                "severity": 0,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "windowSize": "PT10M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "Perf\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| project TimeGenerated, Computer, ObjectName, CounterName, InstanceName, CounterValue, CounterPath, LocalTime\n| where ObjectName == \"SQLServer:Database Replica\" and CounterName == \"Recovery Queue\" and InstanceName != \"_Total\" and CounterValue > 0\n| extend RedoQueueSizeGB = (CounterValue/1024)/1024\n| where RedoQueueSizeGB >= 2",
+                            "timeAggregation": "Count",
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_DISKVOLC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_DISKVOLC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name')]",
+                "description": "Free disk space at Disk C is above Threshold >=99",
+                "severity": 0,
+                "enabled": true,
+                "evaluationFrequency": "PT15M",
+                "windowSize": "[parameters('windowSize')]",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "InsightsMetrics\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| where Namespace == \"LogicalDisk\" and Name == \"FreeSpacePercentage\" and Computer !contains \"-dec-\" and Computer !contains \"-uat-\"\n| extend Disk=tostring(todynamic(Tags)[\"vm.azm.ms/mountId\"])\n| where Disk == \"C:\"\n| extend UsedDiskPercentage = 100 - Val\n| top-nested of Computer by dummy0=max(1),\n  top-nested 1 of TimeGenerated by dummy1=max(TimeGenerated),\n  top-nested 1 of LocalTime by dummy2=max(LocalTime),\n  top-nested of Disk by dummy3=max(1),\n  top-nested 1 of UsedDiskPercentage by dummy4=max(1)\n| summarize AggregatedValue = avg(UsedDiskPercentage) by Computer , bin (TimeGenerated,15m), Disk, UsedDiskPercentage, LocalTime\n| where AggregatedValue >= 99 // Considerar espacio libre de 99",
+                            "timeAggregation": "Average",
+                            "metricMeasureColumn": "AggregatedValue",
+                            "dimensions": [
+                                {
+                                    "name": "Computer",
+                                    "operator": "Include",
+                                    "values": [
+                                        "*"
+                                    ]
+                                }
+                            ],
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": "[parameters('numberOfEvaluationPeriods')]",
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_DISKVOLNONC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_DISKVOLNONC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name')]",
+                "description": "Free disk space at Disk NonC is above Threshold >=99",
+                "severity": 0,
+                "enabled": true,
+                "evaluationFrequency": "PT15M",
+                "windowSize": "[parameters('windowSize')]",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "InsightsMetrics\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| where Namespace == \"LogicalDisk\" and Name == \"FreeSpacePercentage\" and Computer !contains \"-dec-\" and Computer !contains \"-uat-\"\n| extend Disk=tostring(todynamic(Tags)[\"vm.azm.ms/mountId\"])\n| where Disk != \"C:\"\n| extend UsedDiskPercentage = 100 - Val\n| top-nested of Computer by dummy0=max(1),\n  top-nested 1 of TimeGenerated by dummy1=max(TimeGenerated),\n  top-nested 1 of LocalTime by dummy2=max(LocalTime),\n  top-nested of Disk by dummy3=max(1),\n  top-nested 1 of UsedDiskPercentage by dummy4=max(1)\n| summarize AggregatedValue = avg(UsedDiskPercentage) by Computer , bin (TimeGenerated,15m), Disk, UsedDiskPercentage, LocalTime\n| where AggregatedValue >= 99 // Considerar espacio libre de 99",
+                            "timeAggregation": "Average",
+                            "metricMeasureColumn": "AggregatedValue",
+                            "dimensions": [
+                                {
+                                    "name": "Computer",
+                                    "operator": "Include",
+                                    "values": [
+                                        "*"
+                                    ]
+                                }
+                            ],
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": "[parameters('numberOfEvaluationPeriods')]",
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SHUTDOWN_WINDOWS_NETCOOLWEBHOOK_TEST_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SHUTDOWN_WINDOWS_NETCOOLWEBHOOK_TEST_name')]",
+                "description": "One or more Shutdown Log Event has been logged with EventID 16949, 6009 , 1074 or 6008",
+                "severity": 0,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "windowSize": "PT10M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "Event\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| where EventLog == \"System\" and Computer !contains \"-dec-\" and Computer !contains \"-uat-\"\n| where EventID == 16949 or EventID == 6009 or EventID == 1074 or EventID == 6008\n| project TimeGenerated, LocalTime, Source , Computer , EventID, RenderedDescription, UserName",
+                            "timeAggregation": "Count",
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SQL_ALLOCATESPACE_NETCOOLWEBHOOK_TEST_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SQL_ALLOCATESPACE_NETCOOLWEBHOOK_TEST_name')]",
+                "description": "A SQL Allocate Space event has been logged with Event ID 1101 or 1105",
+                "severity": 0,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "windowSize": "PT10M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "Event\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| where EventLog == \"Application\" and Source == \"MSSQLSERVER\" and Computer !contains \"-dec-\" and Computer !contains \"-uat-\"\n| where EventID == 1101  or EventID == 1105\n| project TimeGenerated, LocalTime, Source , Computer , EventID, RenderedDescription, UserName",
+                            "timeAggregation": "Count",
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SQL_BACKUP_NETCOOLWEBHOOK_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SQL_BACKUP_NETCOOLWEBHOOK_name')]",
+                "description": "A Database Backup Job Failed has been logged",
+                "severity": 0,
+                "enabled": true,
+                "evaluationFrequency": "PT10M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "targetResourceTypes": [
+                    "microsoft.operationalinsights/workspaces"
+                ],
+                "windowSize": "PT10M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "AddonAzureBackupJobs\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| project\n    TimeGenerated,\n    LocalTime,\n    Vaults= split(_ResourceId, \"/\")[8],\n    JobDurationInSecs,\n    JobOperation,\n    JobOperationSubType,\n    JobStartDateTime,\n    ServerName = split(ProtectedContainerUniqueId, \";\")[4],\n    JobStatus,\n    DatabaseName = split(BackupItemUniqueId, \";\")[6]\n| where JobStatus != \"Completed\" and Vaults == \"arsvtadbeu1prd01\"",
+                            "timeAggregation": "Count",
+                            "dimensions": [],
+                            "operator": "GreaterThan",
+                            "threshold": 2,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "autoMitigate": false,
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SQL_BACKUP_NETCOOLWEBHOOK_TEST_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SQL_BACKUP_NETCOOLWEBHOOK_TEST_name')]",
+                "description": "A Database Backup Job Failed has been logged",
+                "severity": 0,
+                "enabled": false,
+                "evaluationFrequency": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "windowSize": "PT10M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "AddonAzureBackupJobs\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| project TimeGenerated, LocalTime, Vaults= split(_ResourceId,\"/\")[8], JobDurationInSecs, JobOperation, JobOperationSubType, JobStartDateTime, ContainerProtected = split(ProtectedContainerUniqueId,\";\")[4], JobStatus\n| where JobStatus != \"Completed\" and Vaults == \t\"arsvtadbeu1prd01\"",
+                            "timeAggregation": "Count",
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SQL_ERRORLOG_NETCOOLWEBHOOK_TEST_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SQL_ERRORLOG_NETCOOLWEBHOOK_TEST_name')]",
+                "description": "SQL ErrorLog event has been logged with Event Id 9001 or 9002",
+                "severity": 0,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "windowSize": "PT10M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "Event\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| where EventLog == \"Application\" and Source == \"MSSQLSERVER\" and Computer !contains \"-dec-\" and Computer !contains \"-uat-\"\n| where EventID == 9001 or EventID == 9002\n| project TimeGenerated, LocalTime, Source , Computer , EventID, RenderedDescription, UserName",
+                            "timeAggregation": "Count",
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_WINDOWS_BACKUP_NETCOOLWEBHOOK_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_WINDOWS_BACKUP_NETCOOLWEBHOOK_name')]",
+                "description": "A VM Backup Job Failed has been logged",
+                "severity": 0,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "targetResourceTypes": [
+                    "microsoft.operationalinsights/workspaces"
+                ],
+                "windowSize": "PT15M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "AddonAzureBackupJobs\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| project TimeGenerated, LocalTime, Vaults= split(_ResourceId,\"/\")[8], JobDurationInSecs, JobOperation, JobOperationSubType, JobStartDateTime, ProtectedContainer = split(ProtectedContainerUniqueId,\";\")[4], JobStatus\n| where JobStatus != \"Completed\" and Vaults == \t\"arsvtappeu1prd01\"\n",
+                            "timeAggregation": "Count",
+                            "dimensions": [],
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "autoMitigate": false,
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_WINDOWS_BACKUP_NETCOOLWEBHOOK_TEST_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_WINDOWS_BACKUP_NETCOOLWEBHOOK_TEST_name')]",
+                "description": "A VM Backup Job Failed has been logged",
+                "severity": 0,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "windowSize": "PT15M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "AddonAzureBackupJobs\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| project TimeGenerated, LocalTime, Vaults= split(_ResourceId,\"/\")[8], JobDurationInSecs, JobOperation, JobOperationSubType, JobStartDateTime, ProtectedContainer = split(ProtectedContainerUniqueId,\";\")[4], JobStatus\n| where JobStatus != \"Completed\" and Vaults == \t\"arsvtappeu1prd01\"",
+                            "timeAggregation": "Count",
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_WINDOWS_SERVICES_NETCOOLWEBHOOK_TEST_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_FATAL_WINDOWS_SERVICES_NETCOOLWEBHOOK_TEST_name')]",
+                "description": "One or more Windows Services are not running: \nIIS Admin Service , World Wide Web, NetLogon, Workstation, Server",
+                "severity": 0,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "windowSize": "PT10M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "Event\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| where EventLog == \"System\" and Source == \"Service Control Manager\" and Computer !contains \"-dec-\" and Computer !contains \"-uat-\"\n| parse kind=relaxed EventData with * '<Data Name=\"param1\">' Windows_Service_Name '</Data><Data Name=\"param2\">' Windows_Service_State '</Data>'*\n| where Windows_Service_Name contains \"IIS Admin Service\" or Windows_Service_Name contains \"World Wide Web\" or Windows_Service_Name contains \"NetLogon\" or Windows_Service_Name contains \"Workstation\" or Windows_Service_Name == \"Server\"\n| where Windows_Service_State != \"running\"\n| project TimeGenerated, LocalTime,Computer, EventID, UserName, Windows_Service_Name, Windows_Service_State, RenderedDescription",
+                            "timeAggregation": "Count",
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_WARNING_DISKVOLC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_WARNING_DISKVOLC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name')]",
+                "description": "Free disk space at Disk C is between Threshold >=97 and < 99",
+                "severity": 2,
+                "enabled": true,
+                "evaluationFrequency": "PT15M",
+                "windowSize": "[parameters('windowSize')]",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "InsightsMetrics\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| where Namespace == \"LogicalDisk\" and Name == \"FreeSpacePercentage\" and Computer !contains \"-dec-\" and Computer !contains \"-uat-\"\n| extend Disk=tostring(todynamic(Tags)[\"vm.azm.ms/mountId\"])\n| where Disk == \"C:\"\n| extend UsedDiskPercentage = 100 - Val\n| top-nested of Computer by dummy0=max(1),\n  top-nested 1 of TimeGenerated by dummy1=max(TimeGenerated),\n  top-nested 1 of LocalTime by dummy2=max(LocalTime),\n  top-nested of Disk by dummy3=max(1),\n  top-nested 1 of UsedDiskPercentage by dummy4=max(1)\n| summarize AggregatedValue = avg(UsedDiskPercentage) by Computer , bin (TimeGenerated,15m), Disk, UsedDiskPercentage, LocalTime\n| where AggregatedValue > 85 and AggregatedValue < 90 // Considerar espacio libre de 85  a 97",
+                            "timeAggregation": "Average",
+                            "metricMeasureColumn": "AggregatedValue",
+                            "dimensions": [
+                                {
+                                    "name": "Computer",
+                                    "operator": "Include",
+                                    "values": [
+                                        "*"
+                                    ]
+                                }
+                            ],
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": "[parameters('numberOfEvaluationPeriods')]",
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_WARNING_DISKVOLNONC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_WARNING_DISKVOLNONC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name')]",
+                "description": "Free disk space at Disk NonC is between Threshold- Threshold >=90 and < 97",
+                "severity": 2,
+                "enabled": true,
+                "evaluationFrequency": "PT15M",
+                "windowSize": "[parameters('windowSize')]",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "InsightsMetrics\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| where Namespace == \"LogicalDisk\" and Name == \"FreeSpacePercentage\" and Computer !contains \"-dec-\" and Computer !contains \"-uat-\"\n| extend Disk=tostring(todynamic(Tags)[\"vm.azm.ms/mountId\"])\n| where Disk != \"C:\"\n| extend UsedDiskPercentage = 100 - Val\n| top-nested of Computer by dummy0=max(1),\n  top-nested 1 of TimeGenerated by dummy1=max(TimeGenerated),\n  top-nested 1 of LocalTime by dummy2=max(LocalTime),\n  top-nested of Disk by dummy3=max(1),\n  top-nested 1 of UsedDiskPercentage by dummy4=max(1)\n| summarize AggregatedValue = avg(UsedDiskPercentage) by Computer , bin (TimeGenerated,15m), Disk, UsedDiskPercentage, LocalTime\n| where AggregatedValue >= 90 and AggregatedValue < 97 // Considerar espacio libre de 90  a 97",
+                            "timeAggregation": "Average",
+                            "metricMeasureColumn": "AggregatedValue",
+                            "dimensions": [
+                                {
+                                    "name": "Computer",
+                                    "operator": "Include",
+                                    "values": [
+                                        "*"
+                                    ]
+                                }
+                            ],
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": "[parameters('numberOfEvaluationPeriods')]",
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_WARNING_PAGINGFILE_PERCENTAGEUSAGE_NETCOOLWEBHOOK_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_WARNING_PAGINGFILE_PERCENTAGEUSAGE_NETCOOLWEBHOOK_name')]",
+                "description": "Paging file is above > 95%",
+                "severity": 2,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "windowSize": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "Perf \n| extend LocalTime = TimeGenerated - 5h // convert UTC to LocalTime \n| where ObjectName == \"Paging File\" and CounterName == \"% Usage\" and InstanceName == \"_Total\"  and Computer !contains \"-uat-\" and Computer !contains \"-dec-\"\n| project TimeGenerated, LocalTime, Computer, ObjectName, CounterName, CounterPath, InstanceName, CounterValue \n| summarize AggregatedValue = avg(CounterValue) by bin(TimeGenerated,30m), Computer, LocalTime, CounterName",
+                            "timeAggregation": "Average",
+                            "metricMeasureColumn": "AggregatedValue",
+                            "dimensions": [
+                                {
+                                    "name": "Computer",
+                                    "operator": "Include",
+                                    "values": [
+                                        "*"
+                                    ]
+                                }
+                            ],
+                            "operator": "GreaterThan",
+                            "threshold": 95,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 6,
+                                "minFailingPeriodsToAlert": 6
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_WARNING_SQL_DEADLOCKS_NETCOOLWEBHOOK_TEST_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_WARNING_SQL_DEADLOCKS_NETCOOLWEBHOOK_TEST_name')]",
+                "description": "SQL DeadLock event has been logged with Event ID 1204 , 1205 or 1222",
+                "severity": 2,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "windowSize": "PT10M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "Event\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| where EventLog == \"Application\" and Source == \"MSSQLSERVER\" and Computer !contains \"-dec-\" and Computer !contains \"-uat-\"\n| where EventID == 1204  or EventID == 1205 or EventID == 1222\n| project TimeGenerated, LocalTime, Source , Computer , EventID, RenderedDescription, UserName",
+                            "timeAggregation": "Count",
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_WARNING_SQL_ERRORLOG_NETCOOLWEBHOOK_TEST_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_WARNING_SQL_ERRORLOG_NETCOOLWEBHOOK_TEST_name')]",
+                "description": "SQL ErrorLog event has been logged with Event Id 3159 or 5108",
+                "severity": 2,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "windowSize": "PT10M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "Event\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| where EventLog == \"Application\" and Source == \"MSSQLSERVER\" and Computer !contains \"-dec-\" and Computer !contains \"-uat-\"\n| where EventID == 3159 or EventID == 5108\n| project TimeGenerated, LocalTime, Source , Computer , EventID, RenderedDescription, UserName",
+                            "timeAggregation": "Count",
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_WARNING_TCPIP_WINDOWS_NETCOOLWEBHOOK_TEST_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]"
+            ],
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_LOGALERTV2_WARNING_TCPIP_WINDOWS_NETCOOLWEBHOOK_TEST_name')]",
+                "description": "Monitoring Log File TCPIP Event has been logged with EventID 4199 or 4198",
+                "severity": 2,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "windowSize": "PT10M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "Event\n| extend LocalTime = TimeGenerated - 5h  // convert UTC to LocalTime\n| where EventLog == \"System\" and Computer !contains \"-dec-\" and Computer !contains \"-uat-\"\n| where EventID == 4199  or EventID == 4198\n| project TimeGenerated, LocalTime, Source , Computer , EventID, RenderedDescription, UserName",
+                            "timeAggregation": "Count",
+                            "operator": "GreaterThan",
+                            "threshold": 0,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]"
+                            }
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndtest_name'))]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_PLATFORM_CRITICAL_CPU_PERCENTAGE_NETCOOLWEBHOOK_name')]",
+            "location": "eastus",
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_PLATFORM_CRITICAL_CPU_PERCENTAGE_NETCOOLWEBHOOK_name')]",
+                "description": "Overall CPU Utilization Percentage > 95%",
+                "severity": 1,
+                "enabled": true,
+                "evaluationFrequency": "PT15M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "targetResourceTypes": [
+                    "microsoft.operationalinsights/workspaces"
+                ],
+                "windowSize": "PT15M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "InsightsMetrics\n| extend LocalTime = TimeGenerated - ago(5h) // convert UTC to LocalTime\n| where Origin == \"vm.azm.ms\"\n| where Namespace == \"Processor\"\n    and Name == \"UtilizationPercentage\" and Computer !contains \"-uat-\" and Computer !contains \"-dec-\"\n| top-nested of Computer by dummy0=max(1),\ntop-nested of Val by dummy1=max(1),\ntop-nested 1 of TimeGenerated by dummy2=max(TimeGenerated),\ntop-nested 1 of LocalTime by dummy3=max(LocalTime)\n| summarize AggregatedValue = avg(Val) by bin(TimeGenerated, 15m), Computer, LocalTime\n",
+                            "timeAggregation": "Average",
+                            "metricMeasureColumn": "AggregatedValue",
+                            "dimensions": [
+                                {
+                                    "name": "Computer",
+                                    "operator": "Include",
+                                    "values": [
+                                        "*"
+                                    ]
+                                }
+                            ],
+                            "operator": "GreaterThan",
+                            "threshold": 95,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": 1
+                            }
+                        }
+                    ]
+                },
+                "autoMitigate": false,
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]"
+                    ],
+                    "customProperties": {}
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_PLATFORM_FATAL_CPU_PERCENTAGE_NETCOOLWEBHOOK_name')]",
+            "location": "eastus",
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_PLATFORM_FATAL_CPU_PERCENTAGE_NETCOOLWEBHOOK_name')]",
+                "description": "Overall CPU Utilization Percentage > 98%",
+                "severity": 0,
+                "enabled": true,
+                "evaluationFrequency": "PT15M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "targetResourceTypes": [
+                    "microsoft.operationalinsights/workspaces"
+                ],
+                "windowSize": "PT15M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "InsightsMetrics\n| extend LocalTime = TimeGenerated - ago(5h) // convert UTC to LocalTime\n| where Origin == \"vm.azm.ms\"\n| where Namespace == \"Processor\"\n    and Name == \"UtilizationPercentage\" and Computer !contains \"-uat-\" and Computer !contains \"-dec-\"\n| top-nested of Computer by dummy0=max(1),\ntop-nested of Val by dummy1=max(1),\ntop-nested 1 of TimeGenerated by dummy2=max(TimeGenerated),\ntop-nested 1 of LocalTime by dummy3=max(LocalTime)\n| summarize AggregatedValue = avg(Val) by bin(TimeGenerated, 15m), Computer, LocalTime",
+                            "timeAggregation": "Average",
+                            "metricMeasureColumn": "AggregatedValue",
+                            "dimensions": [
+                                {
+                                    "name": "Computer",
+                                    "operator": "Include",
+                                    "values": [
+                                        "*"
+                                    ]
+                                }
+                            ],
+                            "operator": "GreaterThan",
+                            "threshold": 98,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": 1
+                            }
+                        }
+                    ]
+                },
+                "autoMitigate": false,
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]"
+                    ],
+                    "customProperties": {}
+                }
+            }
+        },
+        {
+            "type": "microsoft.insights/scheduledqueryrules",
+            "apiVersion": "2021-08-01",
+            "name": "[parameters('scheduledqueryrules_UNQ_PLATFORM_WARNING_CPU_PERCENTAGE_NETCOOLWEBHOOK_name')]",
+            "location": "eastus",
+            "properties": {
+                "displayName": "[parameters('scheduledqueryrules_UNQ_PLATFORM_WARNING_CPU_PERCENTAGE_NETCOOLWEBHOOK_name')]",
+                "description": "erall CPU Utilization Percentage > 90%",
+                "severity": 2,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "scopes": [
+                    "[resourceId('microsoft.operationalInsights/workspaces',parameters('workspaces_loganyecinfprd01_name'))]"
+                ],
+                "targetResourceTypes": [
+                    "microsoft.operationalinsights/workspaces"
+                ],
+                "windowSize": "PT5M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "query": "InsightsMetrics\n| extend LocalTime = TimeGenerated - ago(5h) // convert UTC to LocalTime\n| where Origin == \"vm.azm.ms\"\n| where Namespace == \"Processor\"\n    and Name == \"UtilizationPercentage\" and Computer !contains \"-uat-\" and Computer !contains \"-dec-\"\n| top-nested of Computer by dummy0=max(1),\ntop-nested of Val by dummy1=max(1),\ntop-nested 1 of TimeGenerated by dummy2=max(TimeGenerated),\ntop-nested 1 of LocalTime by dummy3=max(LocalTime)\n| summarize AggregatedValue = avg(Val) by bin(TimeGenerated, 5m), Computer, LocalTime\n",
+                            "timeAggregation": "Average",
+                            "metricMeasureColumn": "AggregatedValue",
+                            "dimensions": [
+                                {
+                                    "name": "Computer",
+                                    "operator": "Include",
+                                    "values": [
+                                        "*"
+                                    ]
+                                }
+                            ],
+                            "operator": "GreaterThan",
+                            "threshold": 90,
+                            "failingPeriods": {
+                                "numberOfEvaluationPeriods": 1,
+                                "minFailingPeriodsToAlert": 1
+                            }
+                        }
+                    ]
+                },
+                "autoMitigate": true,
+                "actions": {
+                    "actionGroups": [
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndcloud_name'))]",
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_agkndnetcool_name'))]"
+                    ],
+                    "customProperties": {
+                        "tenant": "YANBAL BOLIVIA S.A."
+                    }
+                }
+            }
+        }        
+    ]
+}

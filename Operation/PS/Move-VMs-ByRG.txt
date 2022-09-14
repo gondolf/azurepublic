@@ -1,0 +1,87 @@
+$date = (Get-Date -UFormat "%Y-%m-%d-%H-%M").ToString()
+$SourceSubscriptionID =  '41f212ca-1daa-42dd-8d4f-7f949481c209'#'41f212ca-1daa-42dd-8d4f-7f949481c209'
+$TargetSubscriptionID =  '367c2c34-86a0-44f4-b58f-4483119d2bcb'#'367c2c34-86a0-44f4-b58f-4483119d2bcb'
+$SourceRSGRName = 'arsgrsateu1d01' #'ARSGRSATEU1D01'
+$TargetRSGRName = 'arsgrsateu1d01'
+$ServerMigration = 'dinetbdnoprdc1'
+
+$Subscription = Get-AzSubscription -SubscriptionId $SourceSubscriptionID
+$SubscriptionName = $Subscription.Name 
+$TenantId = $Subscription.TenantId
+
+"`r`nAnalizando: $SubscriptionName ($SourceSubscriptionID)" 
+
+Get-AzSubscription -SubscriptionId $SourceSubscriptionID -TenantId $TenantId | Set-AzContext
+
+#$GetVNetSubNets = Get-AzVirtualNetwork | Where-Object {$_.SubNets -ne $null }| Select-Object @{Name="SubNetsName" ; Expression={$_.SubNets}}
+
+$GetVirtualMachines =  Get-AzVM -ResourceGroupName $SourceRSGRName -Status | Select-Object Name,ResourceGroupName,Location,PowerState, @{Name="VMSize";Expression={$_.HardwareProfile.VMSize}},`
+@{Name="AdminUserName";Expression={$_.OSProfile.AdminUsername}}, @{Name="OSType";Expression={$_.StorageProfile.OsDisk.OsType}},`
+@{Name="OSDiskName";Expression={$_.StorageProfile.OsDisk.Name}}, @{Name="OSDiskSizeGB";Expression={$_.StorageProfile.OsDisk.DiskSizeGB}},`
+@{Name="DataDisks";Expression={$_.StorageProfile.DataDisks}}, @{Name="NetworkInterfaces";Expression={$_.NetworkProfile.NetworkInterfaces.Id}} ,`
+@{Name="VMScaleSet";Expression={$_.VirtualMachineScaleSet}}, @{Name="Zones";Expression={$_.Zones}}
+
+foreach ($GetVirtualMachine in $GetVirtualMachines)
+{
+    <# $GetVirtualMachine.OSType
+    $GetVirtualMachine.OSDiskName
+    $GetVirtualMachine.OSDiskSizeGB
+    $GetVirtualMachine.DataDisks
+    $GetVirtualMachine.VMSize #>
+    
+    if ($GetVirtualMachine.PowerState -eq 'VM running' -and $GetVirtualMachine.Name -eq $ServerMigration )
+    {
+        "`r`nApagando la virtual machine:" + $GetVirtualMachine.Name
+
+       $JobStopVM = Stop-AzVM -ResourceGroupName $GetVirtualMachine.ResourceGroupName -Name $GetVirtualMachine.Name -Force -AsJob -Verbose
+       $JobStopVM | Get-Job | Wait-Job | Receive-Job | Format-Table -AutoSize
+
+       "`r`nGeneración de Snapshot OSDisk"
+
+       $GetOSDisk = Get-AzDisk -ResourceGroupName $GetVirtualMachine.ResourceGroupName -DiskName $GetVirtualMachine.OSDiskName
+       $SSOSDiskName = "azdss-"+$GetVirtualMachine.Name +"-OSDisk-"+ $date
+
+       $OSDiskSSConfig = New-AzSnapshotConfig -SourceUri $GetOSDisk.Id -OsType $GetOSDisk.OsType -CreateOption Copy -Location $GetOSDisk.Location
+       $NewSSOSDisk = New-AzSnapshot -Snapshot $OSDiskSSConfig -SnapshotName $SSOSDiskName -ResourceGroupName $GetVirtualMachine.ResourceGroupName
+
+       $GetOSDiskConfig = New-AzDiskConfig -SkuName $GetOSDisk.Sku.Name -DiskSizeGB $NewSSOSDisk.DiskSizeGB -OsType $NewSSOSDisk.OsType -Location $NewSSOSDisk.Location -CreateOption Copy `
+       -SourceResourceId $NewSSOSDisk.id -NetworkAccessPolicy $GetOSDisk.NetworkAccessPolicy
+       $NewOSDiskName = $GetVirtualMachine.Name+"-OSDisk"
+       $NewOSDisk = New-AzDisk -DiskName $NewOSDiskName  -Disk $GetOSDiskConfig -ResourceGroupName $GetVirtualMachine.ResourceGroupName
+
+       "`r`nMovimiento del OSDisk"
+       Move-AzResource -ResourceId $NewOSDisk.Id -DestinationSubscriptionId $TargetSubscriptionID -DestinationResourceGroupName $TargetRSGRName -Force
+
+       foreach ($GetDataDisk in $GetVirtualMachine.DataDisks)
+       {
+           <# $GetDataDisk.Name
+           $GetDataDisk.Lun
+           $GetDataDisk.DiskSizeGB
+           $GetDataDisk.Caching #>
+           "`r`nGeneración de Snapshot DataDisk"
+
+           $DataDisk = Get-AzDisk -ResourceGroupName $GetVirtualMachine.ResourceGroupName -DiskName $GetDataDisk.Name
+           $SSDataDiskName = "azdss-"+$GetVirtualMachine.Name +"-DataDisk-"+"Size" + $GetDataDisk.DiskSizeGB + "-Lun" + $GetDataDisk.Lun +"-"+ $date
+           
+           $DataDiskSSConfig = New-AzSnapshotConfig -SourceUri $DataDisk.Id -CreateOption Copy -Location $DataDisk.Location
+           $NewSSDataDisk = New-AzSnapshot -Snapshot $DataDiskSSConfig -SnapshotName $SSDataDiskName -ResourceGroupName $SourceRSGRName
+
+           $GetDataDiskConfig = New-AzDiskConfig -SkuName $DataDisk.Sku.Name -DiskSizeGB $NewSSDataDisk.DiskSizeGB -Location $NewSSDataDisk.Location -CreateOption Copy `
+           -SourceResourceId $NewSSDataDisk.id -NetworkAccessPolicy $DataDisk.NetworkAccessPolicy
+
+           $NewDataDiskName = $GetVirtualMachine.Name+"-DataDisk-"+$GetDataDisk.Lun #nombre del nuevo disco
+           $NewDataDisk = New-AzDisk -DiskName $NewDataDiskName -Disk $GetDataDiskConfig -ResourceGroupName $GetVirtualMachine.ResourceGroupName
+
+           "`r`nMovimiento del DataDisk"
+           Move-AzResource -ResourceId $NewDataDisk.Id -DestinationSubscriptionId $TargetSubscriptionID -DestinationResourceGroupName $TargetRSGRName -Force
+
+       }
+
+    }
+    else 
+    {
+        "`r`nLa VM esta apagada: " + $GetVirtualMachine.Name
+    }
+    
+    
+}

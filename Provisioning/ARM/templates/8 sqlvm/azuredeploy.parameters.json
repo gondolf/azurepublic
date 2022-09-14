@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vmName": {
+      "value": [
+        "SQLVM01"
+      ]
+    },
+    "adminUsername": {
+      "value": "azureuser"
+    },
+    "adminPasswordOrKey": {
+      "value": "P@ssw0rd$1234"
+    },
+    "existingVirtualNetworkName": {
+      "value": "avnetautomation01"
+    },
+    "existingSubnetName": {
+      "value": "asnetautomation01"
+    },
+    "existingVnetResourceGroup": {
+      "value": "arsgrautomation"
+    },
+    "diskType": {
+      "value": "StandardSSD_LRS"
+    },
+    "vmSize": {
+      "value": "Standard_D2s_v3"
+    },
+    "networkaccelerate": {
+      "value": "false"
+    },
+    "nicDeleteOption": {
+      "value": "Detach"
+    },
+    "diskSize": {
+      "value": 256
+    },
+    "licenseType": {
+      "value": "Windows_Client"
+    },
+    "sqlSku": {
+      "value": "SQLDEV"
+    }
+  }
+}

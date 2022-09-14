@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "existingCustomScriptStorageAccountName": {
+      "type": "string",
+      "defaultValue": "stacinfr01"
+    }
+  },
+  "variables": {
+    "blobStorageEndpoint": "blob.core.windows.net",
+    "scriptFolder": "scripts",
+    "scriptFileName": "New-AzWebPostDeployment.ps1"
+  },
+  "resources": [],
+  "outputs": {
+    "stringOutput": {
+      "type": "string",
+      "value": "[deployment().name]"
+    },
+    "fileuri": {
+      "type": "string",
+      "value": "[concat('https://', parameters('existingCustomScriptStorageAccountName'),variables('blobStorageEndpoint'),'/',variables('scriptFolder'),'/',variables('scriptFileName'))]"
+    },
+    "integerOutput": {
+      "type": "int",
+      "value": "[length(environment().authentication.audiences)]"
+    },
+    "booleanOutput": {
+      "type": "bool",
+      "value": "[contains(deployment().name, 'demo')]"
+    },
+    "arrayOutput": {
+      "type": "array",
+      "value": "[environment().authentication.audiences]"
+    },
+    "objectOutput": {
+      "type": "object",
+      "value": "[subscription()]"
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "VMName": {
+      "value": [
+        "j6-prd-web2-co"
+      ]
+    },
+    "existingvirtualNetworkName": {
+      "value": "avnetycospkeastusprd01"
+    },
+    "adminUsername": {
+      "value": "kndadmin"
+    },
+    "existingVirtualNetworkresourcegroup": {
+      "value": "arsgrycoinfeastusprd01"
+    },
+    "existingCustomScriptStorageAccountName": {
+      "value": "staccycoinfeastusprd01"
+    },
+    "existingCustomScriptStorageAccountResourcegroup": {
+      "value": "arsgrycoinfeastusprd01"
+    },
+    "existingsubnetName": {
+      "value": "asnetwebprd01"
+    },
+    "networkaccelerate": {
+      "value": "true"
+    },
+    "AvailabilitySetName": {
+      "value": "avsetycowj6prd01"
+    },
+    "Cluster": {
+      "value": "Yes"
+    },    
+    "existingBootDiagnostic": {
+      "value": "bdiagycoj6eastusprd01"
+    },
+    "OSdiskType": {
+      "value": "StandardSSD_LRS"
+    },
+    "DatadiskType": {
+      "value": "StandardSSD_LRS"
+    },
+    "DatadiskSize": {
+      "value":64
+    },
+    "vmSize": {
+      "value": "Standard_D8s_v5"
+    },
+    "nicDeleteOption": {
+      "value": "Detach"
+    },
+    "adminPasswordOrKey": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/39d16f81-036d-4972-aaf6-379dab6d3da3/resourceGroups/arsgrycoinfeastusprd01/providers/Microsoft.KeyVault/vaults/azkvtycoinfeastusprd01"
+        },
+        "secretName": "kndadmin"
+      }
+    },
+    "customScriptURI": {
+      "value": "https://staccycoinfeastusprd01.blob.core.windows.net/scripts/New-AzVMPostDeployment.ps1"
+    },
+    "domainPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/39d16f81-036d-4972-aaf6-379dab6d3da3/resourceGroups/arsgrycoinfeastusprd01/providers/Microsoft.KeyVault/vaults/azkvtycoinfeastusprd01"
+        },
+        "secretName": "IBMAD"
+      }
+    },
+    "domainToJoin": {
+      "value": "gc.unique-yanbal.com"
+    },
+    "domainUserName": {
+      "value": "IBMAD"
+    }    
+  }
+}

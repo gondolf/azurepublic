@@ -1,0 +1,260 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "environment": {
+            "type": "string",
+            "metadata": {
+                "description": "Prefix for the environment (2-5 characters)"
+            },
+            "defaultValue": "prd01"
+        },
+        "VMName": {
+            "type": "string",
+            "metadata": {
+                "description": "Storage Account type by default is standrad_lrs"
+            }
+        },
+        "correlative": {
+            "type": "string",
+            "metadata": {
+                "description": "This will be a name suffix for concatenate name resources"
+            }
+        },
+        "existingvirtualNetworkName": {
+            "type": "string",
+            "metadata": {
+                "description": "Existing VNet to which the VM will connect."
+            }
+        },
+        "existingresourcegroupVirtualNetwork": {
+            "type": "string",
+            "metadata": {
+                "description": "Resource Group Name for Existing VNet to which the VM will connect."
+            }
+        },
+        "existingsubnetName": {
+            "type": "string",
+            "metadata": {
+                "description": "Existing Subnet to which the VM will connect."
+            }
+        },
+        "existingBootDiagnostic": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of an existing storage account to which diagnostics data is transfered."
+            }
+        },
+        "adminUsername": {
+            "type": "string",
+            "metadata": {
+                "description": "User name for the Virtual Machine."
+            }
+        },
+        "imageSKU": {
+            "type": "string",
+            "defaultValue": "2019-Datacenter",
+            "allowedValues": [
+                "2012-R2-Datacenter",
+                "2016-Datacenter",
+                "2019-Datacenter"
+            ],
+            "metadata": {
+                "description": "Image SKU"
+            }
+        },
+        "vmSize": {
+            "type": "string",
+            "metadata": {
+                "description": "Size of the virtual machine"
+            },
+            "defaultValue": "Standard_B1ls"
+        },
+        "NumbOfInstances": {
+            "type": "int",
+            "metadata": {
+                "description": "Number of Web Servers"
+            },
+            "allowedValues": [
+                1,
+                2
+            ],
+            "defaultValue": 1
+        },
+        "diskType": {
+            "type": "string",
+            "allowedValues": [
+                "Standard_LRS",
+                "StandardSSDLRS",
+                "Premium_LRS"
+            ],
+            "metadata": {
+                "description": "The type of the Storage Account created"
+            },
+            "defaultValue": "StandardSSDLRS"
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources."
+            }
+        },
+        "adminPasswordOrKey": {
+            "type": "securestring",
+            "metadata": {
+                "description": "SSH Key or password for the Virtual Machine. SSH key is recommended."
+            }
+        },
+        "_artifactsLocation": {
+            "type": "string",
+            "defaultValue": "[deployment().properties.templateLink.uri]",
+            "metadata": {
+                "description": "The base URI where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
+            }
+        },
+        "_artifactsLocationSasToken": {
+            "type": "securestring",
+            "metadata": {
+                "description": "The sasToken required to access _artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated."
+            },
+            "defaultValue": ""
+        }
+    },
+    "variables": {
+        "imagePublisher": "MicrosoftWindowsServer",
+        "imageOffer": "WindowsServer",
+        "nicName": "[concat('aznic', parameters('VMName'),parameters('Correlative'))]",
+        "vmName": "[concat('lnx', parameters('VMName'),parameters('Correlative'))]",
+        "subnetRef": "[resourceId(parameters('existingresourcegroupVirtualNetwork'),'Microsoft.Network/virtualNetworks/subnets', parameters('existingvirtualNetworkName'), parameters('existingsubnetName'))]",
+        "AvailabilitySetName": "[concat(parameters('environment'),parameters('VMName'))]",
+        "blobStorageEndpoint": "blob.core.windows.net",
+        "vmExtensionName": "dscExtension",
+        "configurationFunction": "WebServerConfig.ps1\\WebServerConfig"
+    },
+
+    "resources": [
+        {
+            "apiVersion": "2020-05-01",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[variables('nicName')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[variables('nicName')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[variables('subnetRef')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "2020-06-01",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[variables('vmName')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
+            ],
+            "properties": {
+                "availabilitySet": {
+                    "id": "[resourceId('Microsoft.Compute/availabilitySets',variables('AvailabilitySetName'))]"
+                },
+                "hardwareProfile": {
+                    "vmSize": "[parameters('vmSize')]"
+                },
+                "osProfile": {
+                    "computerName": "[variables('vmName')]",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPasswordOrKey')]"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "[variables('imagePublisher')]",
+                        "offer": "[variables('imageOffer')]",
+                        "sku": "[parameters('imageSKU')]",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "name": "[concat(variables('vmName'),'_OSDisk')]",
+                        "managedDisk": { "storageAccountType": "Standard_LRS" },
+                        "caching": "ReadWrite",
+                        "createOption": "FromImage"
+                    },
+                    "dataDisks": [
+                        {
+                            "name": "[concat(variables('vmName'),'_DataDisk_',copyIndex(0,1))]",
+                            "managedDisk": {
+                                "storageAccountType": "[parameters('diskType')]"
+                            },
+                            "diskSizeGB": 64,
+                            "lun": 0,
+                            "createOption": "Empty"
+                        }
+                    ]
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true,
+                        "storageUri": "[concat('http://',parameters('existingBootDiagnostic'),'.',variables('blobStorageEndpoint'))]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "[concat(variables('vmName'), copyindex(),'/', variables('vmExtensionName'))]",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2020-12-01",
+            "location": "[resourceGroup().location]",
+            "copy": {
+                "name": "webSrvMachineLoop",
+                "count": "[parameters('NumbOfInstances')]"
+            },
+            "tags": {
+                "displayName": "customScript1 for Windows VM"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', variables('vmName'))]"
+            ],
+            "properties": {
+                "publisher": "Microsoft.Powershell",
+                "type": "DSC",
+                "typeHandlerVersion": "2.19",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "ModulesUrl": "[uri(parameters('_artifactsLocation'), concat('scripts/WebServerConfig.ps1.zip', parameters('_artifactsLocationSasToken')))]",
+                    "ConfigurationFunction": "[variables('configurationFunction')]",
+                    "wmfVersion": "4.0"
+                },
+                "protectedSettings": {
+                    "commandToExecute": "powershell -ExecutionPolicy Bypass -file WebServerConfig.ps1"
+                }
+            }
+        }
+    ],
+    "outputs": {
+        "FQDN": {
+            "type": "string",
+            "value": "[reference(resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))).dnsSettings.FQDN]"
+        },
+        "PrivateIPAddress": {
+            "type": "string",
+            "value": "[reference(resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))).ipAddress]"
+        }
+    }
+}

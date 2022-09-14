@@ -1,0 +1,120 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "logAnalyticsName": {
+            "defaultValue": "logangeedemo01",
+            "type": "string"
+        },        
+        "azureFirewallTier": {
+            "defaultValue": "Standard",
+            "type": "string"
+        },
+        "azureFirewalls_azfwsyeceu1prd01_name": {
+            "defaultValue": "azfwsyeceu1prd01",
+            "type": "String"
+        },
+        "publicIPAddresses_azpipazfwsyeceu1prd01_externalid": {
+            "defaultValue": "/subscriptions/d9bc6363-1579-4256-8ac0-7686697ffdb4/resourceGroups/arsgrinfeu1p01/providers/Microsoft.Network/publicIPAddresses/azpipazfwsyeceu1prd01",
+            "type": "String"
+        },
+        "virtualNetworks_avnetyeceu1hub01_externalid": {
+            "defaultValue": "/subscriptions/d9bc6363-1579-4256-8ac0-7686697ffdb4/resourceGroups/arsgrinfeu1p01/providers/Microsoft.Network/virtualNetworks/avnetyeceu1hub01",
+            "type": "String"
+        },
+        "publicIPAddresses_azpipazfwsyboeu1prd01_externalid": {
+            "defaultValue": "/subscriptions/d9bc6363-1579-4256-8ac0-7686697ffdb4/resourceGroups/arsgrinfeu1p01/providers/Microsoft.Network/publicIPAddresses/azpipazfwsyboeu1prd01",
+            "type": "String"
+        },
+        "firewallPolicies_azfwpbasicprd01_externalid": {
+            "defaultValue": "/subscriptions/d9bc6363-1579-4256-8ac0-7686697ffdb4/resourceGroups/arsgrinfeu1p01/providers/Microsoft.Network/firewallPolicies/azfwpbasicprd01",
+            "type": "String"
+        },
+        "azureFirewall": {
+            "type": "object",
+            "defaultValue": {
+                "name": "AzureFirewall",
+                "publicIPAddressName": "pip-firewall",
+                "subnetName": "AzureFirewallSubnet",
+                "subnetPrefix": "10.0.3.0/26",
+                "routeName": "r-nexthop-to-fw"
+            }
+        }        
+    },
+    "variables": {
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/azureFirewalls",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('azureFirewalls_azfwsyeceu1prd01_name')]",
+            "location": "eastus",
+            "tags": {
+                "costcenter": "Shared"
+            },
+            "properties": {
+                "sku": {
+                    "name": "AZFW_VNet",
+                    "tier": "[parameters('AzureFirewallTier')]"
+                },
+                "threatIntelMode": "Alert",
+                "additionalProperties": {},
+                "ipConfigurations": [
+                    {
+                        "name": "[concat('azpip', parameters('azureFirewalls_azfwsyeceu1prd01_name'))]",
+                        "properties": {
+                            "publicIPAddress": {
+                                "id": "[parameters('publicIPAddresses_azpipazfwsyeceu1prd01_externalid')]"
+                            },
+                            "subnet": {
+                                "id": "[concat(parameters('virtualNetworks_avnetyeceu1hub01_externalid'), '/subnets/AzureFirewallSubnet')]"
+                            }
+                        }
+                    },
+                    {
+                        "name": "azpipazfwsyboascprd01",
+                        "properties": {
+                            "publicIPAddress": {
+                                "id": "[parameters('publicIPAddresses_azpipazfwsyboeu1prd01_externalid')]"
+                            }
+                        }
+                    }
+                ],
+                "networkRuleCollections": [],
+                "applicationRuleCollections": [],
+                "natRuleCollections": [],
+                "firewallPolicy": {
+                    "id": "[parameters('firewallPolicies_azfwpbasicprd01_externalid')]"
+                }
+            },
+            "resources": [
+                {
+                    "type": "providers/diagnosticSettings",
+                    "apiVersion": "2017-05-01-preview",
+                    "name": "[concat('Microsoft.Insights/default', parameters('logAnalyticsName'))]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Network/azureFirewalls', parameters('azureFirewall').name)]",
+                        "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsName'))]"
+                    ],
+                    "properties": {
+                        "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsName'))]",
+                        "logs": [
+                            {
+                                "category": "AzureFirewallApplicationRule",
+                                "enabled": true
+                            },
+                            {
+                                "category": "AzureFirewallNetworkRule",
+                                "enabled": true
+                            },
+                            {
+                                "category": "AzureFirewallDnsProxy",
+                                "enabled": true
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

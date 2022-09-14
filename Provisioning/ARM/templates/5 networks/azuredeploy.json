@@ -1,0 +1,202 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+
+      "location": {
+        "type": "string",
+        "defaultValue": "[resourceGroup().location]",
+        "metadata": {
+          "description": "Location for all resources."
+        }
+      }
+    },
+    "variables": {
+
+      "devSpokeVnetName": "spokeDevVnet",
+      "devSpokeVnetPrefix": "10.10.0.0/16",
+      "prodSpokeVnetName": "spokeProdVnet",
+      "prodSpokeVnetPrefix": "10.100.0.0/16",
+      "spokeWorkloadSubnetName": "WorkloadSubnet",
+      "devSpokeWorkloadSubnetPrefix": "10.10.0.0/16",
+      "prodSpokeWorkloadSubnetPrefix": "10.100.0.0/16",
+      "winNsgName": "winJmpHostNsg"
+    },
+    "resources": [
+
+      {
+        "comments": "Development Spoke Virtual Network (VNet)",
+        "type": "Microsoft.Network/virtualNetworks",
+        "name": "[variables('devSpokeVnetName')]",
+        "apiVersion": "2019-11-01",
+        "location": "[parameters('location')]",
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "[variables('devSpokeVnetPrefix')]"
+            ]
+          },
+          "enableDdosProtection": false,
+          "enableVmProtection": false
+        }
+      },
+      {
+        "comments": "Development Workload Subnet",
+        "type": "Microsoft.Network/virtualNetworks/subnets",
+        "name": "[concat(variables('devSpokeVnetName'), '/', variables('spokeWorkloadSubnetName'))]",
+        "apiVersion": "2019-11-01",
+        "dependsOn": [
+          "[resourceId('Microsoft.Network/virtualNetworks', variables('devSpokeVnetName'))]"
+        ],
+        "properties": {
+          "addressPrefix": "[variables('devSpokeWorkloadSubnetPrefix')]"
+        }
+      },
+      {
+        "comments": "Production Spoke Virtual Network (VNet)",
+        "type": "Microsoft.Network/virtualNetworks",
+        "name": "[variables('prodSpokeVnetName')]",
+        "apiVersion": "2019-11-01",
+        "location": "[parameters('location')]",
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "[variables('prodSpokeVnetPrefix')]"
+            ]
+          },
+          "enableDdosProtection": false,
+          "enableVmProtection": false
+        }
+      },
+      {
+        "comments": "Production Workload Subnet",
+        "type": "Microsoft.Network/virtualNetworks/subnets",
+        "name": "[concat(variables('prodSpokeVnetName'), '/', variables('spokeWorkloadSubnetName'))]",
+        "apiVersion": "2019-11-01",
+        "dependsOn": [
+          "[resourceId('Microsoft.Network/virtualNetworks', variables('prodSpokeVnetName'))]"
+        ],
+        "properties": {
+          "addressPrefix": "[variables('prodSpokeWorkloadSubnetPrefix')]",
+          "networkSecurityGroup": {
+              "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('winNsgName'))]"
+          }
+        }
+      },
+
+      {
+        "comments": "NSG For Windows Jump Host",
+        "type": "Microsoft.Network/networkSecurityGroups",
+        "name": "[variables('winNsgName')]",
+        "apiVersion": "2019-11-01",
+        "location": "[parameters('location')]",
+        "properties": {
+          "securityRules": [
+            {
+              "name": "NSG_RULE_INBOUND_RDP",
+              "properties": {
+                "description": "Allow inbound RDP",
+                "protocol": "Tcp",
+                "sourcePortRange": "*",
+                "destinationPortRange": "3389",
+                "sourceAddressPrefix": "*",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 1000,
+                "direction": "Inbound"
+              }
+            }
+          ],
+          "defaultSecurityRules": [
+            {
+              "name": "AllowVnetInBound",
+              "properties": {
+                "description": "Allow inbound traffic from all VMs in VNET",
+                "protocol": "*",
+                "sourcePortRange": "*",
+                "destinationPortRange": "*",
+                "sourceAddressPrefix": "VirtualNetwork",
+                "destinationAddressPrefix": "VirtualNetwork",
+                "access": "Allow",
+                "priority": 65000,
+                "direction": "Inbound"
+              }
+            },
+            {
+              "name": "AllowAzureLoadBalancerInBound",
+              "properties": {
+                "description": "Allow inbound traffic from azure load balancer",
+                "protocol": "*",
+                "sourcePortRange": "*",
+                "destinationPortRange": "*",
+                "sourceAddressPrefix": "AzureLoadBalancer",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 65001,
+                "direction": "Inbound"
+              }
+            },
+            {
+              "name": "DenyAllInBound",
+              "properties": {
+                "description": "Deny all inbound traffic",
+                "protocol": "*",
+                "sourcePortRange": "*",
+                "destinationPortRange": "*",
+                "sourceAddressPrefix": "*",
+                "destinationAddressPrefix": "*",
+                "access": "Deny",
+                "priority": 65500,
+                "direction": "Inbound"
+              }
+            },
+            {
+              "name": "AllowVnetOutBound",
+              "properties": {
+                "description": "Allow outbound traffic from all VMs to all VMs in VNET",
+                "protocol": "*",
+                "sourcePortRange": "*",
+                "destinationPortRange": "*",
+                "sourceAddressPrefix": "VirtualNetwork",
+                "destinationAddressPrefix": "VirtualNetwork",
+                "access": "Allow",
+                "priority": 65000,
+                "direction": "Outbound"
+              }
+            },
+            {
+              "name": "AllowInternetOutBound",
+              "properties": {
+                "description": "Allow outbound traffic from all VMs to Internet",
+                "protocol": "*",
+                "sourcePortRange": "*",
+                "destinationPortRange": "*",
+                "sourceAddressPrefix": "*",
+                "destinationAddressPrefix": "Internet",
+                "access": "Allow",
+                "priority": 65001,
+                "direction": "Outbound"
+              }
+            },
+            {
+              "name": "DenyAllOutBound",
+              "properties": {
+                "description": "Deny all outbound traffic",
+                "protocol": "*",
+                "sourcePortRange": "*",
+                "destinationPortRange": "*",
+                "sourceAddressPrefix": "*",
+                "destinationAddressPrefix": "*",
+                "access": "Deny",
+                "priority": 65500,
+                "direction": "Outbound"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "outputs": {
+    }
+  }
+  

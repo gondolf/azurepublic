@@ -1,0 +1,30 @@
+{
+    "$schema":"https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion":"1.0.0.0",
+   "parameters": {
+    "customer":{
+      "value": "gee"
+    },
+     "adminUserName": {
+       "value": "azureuser"
+     },
+     "adminPassword": {
+       "value": "Password1234$"
+     },
+     "windowsVMCount": {
+       "value": 1
+     },
+     "linuxVMCount": {
+      "value": 0
+    },
+    "vmSize": {
+      "value": "Standard_B2s"
+    },
+    "diskType": {
+      "value": "StandardSSD_LRS"
+    },           
+     "deployVpnGateway": {
+        "value": false
+     }
+   }
+ }

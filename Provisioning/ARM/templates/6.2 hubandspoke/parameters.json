@@ -1,0 +1,27 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "logAnalyticsName": {
+            "value": "logandemo01"
+        },        
+        "azureFirewallTier": {
+            "value": "Standard"
+        },
+        "azureFirewalls_azfwsyeceu1prd01_name": {
+            "value": "azurefirewall"
+        },
+        "publicIPAddresses_azpipazfwsyeceu1prd01_externalid": {
+            "value": "/subscriptions/964df7ca-3ba4-48b6-a695-1ed9db5723f8/resourceGroups/1-504c58aa-playground-sandbox/providers/Microsoft.Network/publicIPAddresses/azpipazfwsyeceu1prd01"
+        },
+        "virtualNetworks_avnetyeceu1hub01_externalid": {
+            "value": "/subscriptions/964df7ca-3ba4-48b6-a695-1ed9db5723f8/resourceGroups/1-504c58aa-playground-sandbox/providers/Microsoft.Network/virtualNetworks/hub"
+        },
+        "publicIPAddresses_azpipazfwsyboeu1prd01_externalid": {
+            "value": "/subscriptions/964df7ca-3ba4-48b6-a695-1ed9db5723f8/resourceGroups/1-504c58aa-playground-sandbox/providers/Microsoft.Network/publicIPAddresses/azpipazfwsyboeu1prd01"
+        },
+        "firewallPolicies_azfwpbasicprd01_externalid": {
+            "value": "/subscriptions/964df7ca-3ba4-48b6-a695-1ed9db5723f8/resourceGroups/1-f1052f2d-playground-sandbox/providers/Microsoft.Network/firewallPolicies/MainFirewallPolicy"
+        }
+    }
+}

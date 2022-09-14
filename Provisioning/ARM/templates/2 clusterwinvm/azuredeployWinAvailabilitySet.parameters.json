@@ -1,0 +1,48 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environment": {
+      "value": "aut01"
+    },
+    "VMName": {
+      "value": [
+        "vmtest01",
+        "vmtest02"
+      ]
+    },
+    "adminUsername": {
+      "value": "kndadmin"
+    },
+    "existingvirtualNetworkName": {
+      "value": "avnetyeceu1aut01"
+    },
+    "existingresourcegroupVirtualNetwork": {
+      "value": "asrgrvpntest01"
+    },
+    "existingsubnetName": {
+      "value": "app"
+    },
+    "networkaccelerate": {
+      "value": "false"
+    },    
+    "AvailabilitySetName": {
+      "value": "avtest01"
+    },
+    "existingBootDiagnostic": {
+      "value": "vdiagasrgrwin01"
+    },
+    "adminPasswordOrKey": {
+      "value": "P@ssword1234"
+    },
+    "diskType": {
+      "value": "Standard_LRS"
+    },
+    "vmSize": {
+      "value": "Standard_B1s"
+    },
+    "DataDiskSize": {
+      "value": 32
+    }
+  }
+}

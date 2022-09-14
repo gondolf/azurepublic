@@ -1,0 +1,102 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "CustomerID": {
+            "value": "UNQ"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_DESYNC_SQL_NETCOOLWEBHOOK_name": {
+            "value": "UNQ_LOGALERTV2_FATAL_DESYNC_SQL_NETCOOLWEBHOOK"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SQL_BACKUP_NETCOOLWEBHOOK_name": {
+            "value": "UNQ_LOGALERTV2_FATAL_SQL_BACKUP_NETCOOLWEBHOOK"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_WINDOWS_BACKUP_NETCOOLWEBHOOK_name": {
+            "value": "UNQ_LOGALERTV2_FATAL_WINDOWS_BACKUP_NETCOOLWEBHOOK"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_SERVICES_SQL_NETCOOLWEBHOOK_name": {
+            "value": "UNQ_LOGALERTV2_CRITICAL_SERVICES_SQL_NETCOOLWEBHOOK"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SQL_BACKUP_NETCOOLWEBHOOK_TEST_name": {
+            "value": "UNQ_LOGALERTV2_FATAL_SQL_BACKUP_NETCOOLWEBHOOK_TEST"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SQL_ERRORLOG_NETCOOLWEBHOOK_TEST_name": {
+            "value": "UNQ_LOGALERTV2_FATAL_SQL_ERRORLOG_NETCOOLWEBHOOK_TEST"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_WINDOWS_BACKUP_NETCOOLWEBHOOK_TEST_name": {
+            "value": "UNQ_LOGALERTV2_FATAL_WINDOWS_BACKUP_NETCOOLWEBHOOK_TEST"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_WARNING_SQL_ERRORLOG_NETCOOLWEBHOOK_TEST_name": {
+            "value": "UNQ_LOGALERTV2_WARNING_SQL_ERRORLOG_NETCOOLWEBHOOK_TEST"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_MEMORY_PERCENTAGE_NETCOOLWEBHOOK_name": {
+            "value": "UNQ_LOGALERTV2_CRITICAL_MEMORY_PERCENTAGE_NETCOOLWEBHOOK"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_SQL_ERRORLOG_NETCOOLWEBHOOK_TEST_name": {
+            "value": "UNQ_LOGALERTV2_CRITICAL_SQL_ERRORLOG_NETCOOLWEBHOOK_TEST"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_WARNING_SQL_DEADLOCKS_NETCOOLWEBHOOK_TEST_name": {
+            "value": "UNQ_LOGALERTV2_WARNING_SQL_DEADLOCKS_NETCOOLWEBHOOK_TEST"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_WARNING_TCPIP_WINDOWS_NETCOOLWEBHOOK_TEST_name": {
+            "value": "UNQ_LOGALERTV2_WARNING_TCPIP_WINDOWS_NETCOOLWEBHOOK_TEST"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_HEARTBEAT_UPANDOWN_NETCOOLWEBHOOK_name": {
+            "value": "UNQ_LOGALERTV2_CRITICAL_HEARTBEAT_UPANDOWN_NETCOOLWEBHOOK"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SHUTDOWN_WINDOWS_NETCOOLWEBHOOK_TEST_name": {
+            "value": "UNQ_LOGALERTV2_FATAL_SHUTDOWN_WINDOWS_NETCOOLWEBHOOK_TEST"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_WINDOWS_SERVICES_NETCOOLWEBHOOK_TEST_name": {
+            "value": "UNQ_LOGALERTV2_FATAL_WINDOWS_SERVICES_NETCOOLWEBHOOK_TEST"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_SQL_CONNECTION_NETCOOLWEBHOOK_TEST_name": {
+            "value": "UNQ_LOGALERTV2_CRITICAL_SQL_CONNECTION_NETCOOLWEBHOOK_TEST"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_SQL_ALLOCATESPACE_NETCOOLWEBHOOK_TEST_name": {
+            "value": "UNQ_LOGALERTV2_FATAL_SQL_ALLOCATESPACE_NETCOOLWEBHOOK_TEST"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_FAILOVER_CLUSTER_NETCOOLWEBHOOK_TEST_name": {
+            "value": "UNQ_LOGALERTV2_CRITICAL_FAILOVER_CLUSTER_NETCOOLWEBHOOK_TEST"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_WINDOWS_SERVICES_NETCOOLWEBHOOK_TEST_name": {
+            "value": "UNQ_LOGALERTV2_CRITICAL_WINDOWS_SERVICES_NETCOOLWEBHOOK_TEST"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_DISKVOLC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name": {
+            "value": "UNQ_LOGALERTV2_FATAL_DISKVOLC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_WARNING_PAGINGFILE_PERCENTAGEUSAGE_NETCOOLWEBHOOK_name": {
+            "value": "UNQ_LOGALERTV2_WARNING_PAGINGFILE_PERCENTAGEUSAGE_NETCOOLWEBHOOK"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_SQL_DEADLOCKSPERSECOND_NETCOOLWEBHOOK_TEST_name": {
+            "value": "UNQ_LOGALERTV2_CRITICAL_SQL_DEADLOCKSPERSECOND_NETCOOLWEBHOOK_TEST"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_WARNING_DISKVOLC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name": {
+            "value": "UNQ_LOGALERTV2_WARNING_DISKVOLC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_DISKVOLC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name": {
+            "value": "UNQ_LOGALERTV2_CRITICAL_DISKVOLC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_FATAL_DISKVOLNONC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name": {
+            "value": "UNQ_LOGALERTV2_FATAL_DISKVOLNONC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_WARNING_DISKVOLNONC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name": {
+            "value": "UNQ_LOGALERTV2_WARNING_DISKVOLNONC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK"
+        },
+        "scheduledqueryrules_UNQ_LOGALERTV2_CRITICAL_DISKVOLNONC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK_name": {
+            "value": "UNQ_LOGALERTV2_CRITICAL_DISKVOLNONC_FREESPACEPERCENTAGE_NETCOOLWEBHOOK"
+        },
+        "workspaces_loganyecinfprd01_name": {
+            "value": "loganyboinfeastusprd01"
+        },
+        "actionGroups_agkndtest_name": {
+            "value": "agkndtest"
+        },
+        "actionGroups_agkndcloud_name": {
+            "value": "agkndcloud"
+        },
+        "actionGroups_agkndnetcool_name": {
+            "value": "agkndnetcool"
+        }        
+    }
+}
