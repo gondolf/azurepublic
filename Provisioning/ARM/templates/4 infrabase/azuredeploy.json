@@ -25,43 +25,73 @@
         "environment": {
             "type": "array",
             "defaultValue": "prd01"
+        },
+        "index": {
+            "type": "int",
+            "defaultValue": 1
+        },
+        "infraResourcesCode": {
+            "type": "string",
+            "defaultValue": "infr"
+        },
+        "HubResourcesCode": {
+            "type": "string",
+            "defaultValue": "hub"
         }
     },
     "variables": {
-        "location": "[parameters('location')]",
-        "arrayUnion": "[union(parameters('appNames'),parameters('environment'))]",
-        "rgprefix": "arsgr",
-        "rgNameArray": {
-
-        },
+        "loganPrefix": "logan",
+        "vnetPrefix": "avnet",
+        "snetPrefix": "asnet",
+        "aznsgPrefix": "aznsg",
+        "diagnosticPrefix": "bdiag",
+        "rgPrefix": "arsgr",
+        "suffixName": "[concat(parameters('customer'),parameters('location'))]",
+        "loganalyticsWorkspaceName": "[concat(variables('loganPrefix'),variables('suffixName'),parameters('environment')[0],parameters('index'))]",
+        "rgInfraName": "[toLower(concat(variables('rgPrefix'),parameters('customer'),parameters('infraResourcesCode'),parameters('location'),parameters('HubResourcesCode'),parameters('index')))]",
         "copy": [
             {
-                "name": "rgName0",
+                "name": "ArrayRGEnv0",
                 "count": "[length(parameters('appNames'))]",
-                "input": "[toLower(concat(variables('rgprefix'),parameters('customer'),parameters('appNames')[copyIndex('rgName0')],parameters('location'),parameters('environment')[0]))]"
+                "input": "[toLower(concat(variables('rgPrefix'),parameters('customer'),parameters('appNames')[copyIndex('ArrayRGEnv0')],parameters('location'),parameters('environment')[0],parameters('index')))]"
 
             },
             {
-                "name": "rgName1",
+                "name": "ArrayRGEnv1",
                 "count": "[length(parameters('appNames'))]",
-                "input": "[toLower(concat(variables('rgprefix'),parameters('customer'),parameters('appNames')[copyIndex('rgName1')],parameters('location'),parameters('environment')[1]))]"
+                "input": "[toLower(concat(variables('rgPrefix'),parameters('customer'),parameters('appNames')[copyIndex('ArrayRGEnv1')],parameters('location'),parameters('environment')[1],parameters('index')))]"
 
             },
             {
-                "name": "rgName2",
+                "name": "ArrayRGEnv2",
                 "count": "[length(parameters('appNames'))]",
-                "input": "[toLower(concat(variables('rgprefix'),parameters('customer'),parameters('appNames')[copyIndex('rgName2')],parameters('location'),parameters('environment')[2]))]"
-
+                "input": "[toLower(concat(variables('rgPrefix'),parameters('customer'),parameters('appNames')[copyIndex('ArrayRGEnv2')],parameters('location'),parameters('environment')[2],parameters('index')))]"
             }
         ]
     },
 
     "resources": [
+
+        {
+            "type": "Microsoft.Resources/resourceGroups",
+            "apiVersion": "2020-06-01",
+            "name": "[variables('rgInfraName')]",
+            "location": "[parameters('Location')]",
+            "tags": {
+                "Note": "subscription level deployment"
+            },
+            "dependsOn": [
+            ],
+            "properties": {}
+        },
         {
             "name": "nestedDeployment1",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2021-04-01",
-            "location": "[parameters('location')]",
+            "resourceGroup": "[variables('rgInfraName')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/resourceGroups',variables('rgInfraName'))]"
+                ],
             "properties": {
                 "mode": "Incremental",
                 "template": {
@@ -71,29 +101,32 @@
                     "variables": {},
                     "resources": [
                         {
-                            "type": "Microsoft.Resources/resourceGroups",
-                            "apiVersion": "2020-06-01",
-                            "name": "[concat(parameters('customer'),'infra')]",
-                            "location": "[deployment().location]",
-                            "tags": {
-                                "Note": "subscription level deployment"
-                            },
-                            "dependsOn": [
-                            ],
-                            "properties": {}
+                            "comments": "Log Analytics workspace",
+                            "type": "Microsoft.OperationalInsights/workspaces",
+                            "apiVersion": "2020-03-01-preview",
+                            "name": "[variables('loganalyticsWorkspaceName')]",
+                            "location": "[parameters('location')]",
+                            "properties": {
+                                "sku": {
+                                    "name": "PerGB2018"
+                                },
+                                "features": {
+                                    "searchVersion": 1
+                                }
+                            }
                         }
                     ],
                     "outputs": {}
                 }
             }
-        },
+        },        
         {
             "type": "Microsoft.Resources/resourceGroups",
             "apiVersion": "2020-06-01",
-            "name": "[variables('rgName0')[copyIndex()]]",
+            "name": "[variables('ArrayRGEnv0')[copyIndex()]]",
             "location": "[parameters('Location')]",
             "copy": {
-                "name": "rgloop",
+                "name": "rgloop0",
                 "count": "[length(parameters('appNames'))]"
             },
             "tags": {
@@ -106,10 +139,10 @@
         {
             "type": "Microsoft.Resources/resourceGroups",
             "apiVersion": "2020-06-01",
-            "name": "[variables('rgName1')[copyIndex()]]",
+            "name": "[variables('ArrayRGEnv1')[copyIndex()]]",
             "location": "[parameters('Location')]",
             "copy": {
-                "name": "rgloop",
+                "name": "rgloop1",
                 "count": "[length(parameters('appNames'))]"
             },
             "tags": {
@@ -122,10 +155,10 @@
         {
             "type": "Microsoft.Resources/resourceGroups",
             "apiVersion": "2020-06-01",
-            "name": "[variables('rgName2')[copyIndex()]]",
+            "name": "[variables('ArrayRGEnv2')[copyIndex()]]",
             "location": "[parameters('Location')]",
             "copy": {
-                "name": "rgloop",
+                "name": "rgloop2",
                 "count": "[length(parameters('appNames'))]"
             },
             "tags": {
@@ -140,22 +173,22 @@
         "resourceGroups1": {
             "type": "array",
             "copy": {
-                "count": "[length(variables('rgName1'))]",
-                "input": "[toLower(variables('rgName1')[copyIndex()])]"
+                "count": "[length(variables('ArrayRGEnv0'))]",
+                "input": "[toLower(variables('ArrayRGEnv0')[copyIndex()])]"
             }
         },
         "resourceGroups2": {
             "type": "array",
             "copy": {
-                "count": "[length(variables('rgName2'))]",
-                "input": "[toLower(variables('rgName2')[copyIndex()])]"
+                "count": "[length(variables('ArrayRGEnv1'))]",
+                "input": "[toLower(variables('ArrayRGEnv1')[copyIndex()])]"
             }
         },
         "resourceGroups3": {
             "type": "array",
             "copy": {
-                "count": "[length(variables('rgName2'))]",
-                "input": "[toLower(variables('rgName2')[copyIndex()])]"
+                "count": "[length(variables('ArrayRGEnv2'))]",
+                "input": "[toLower(variables('ArrayRGEnv2')[copyIndex()])]"
             }
         }
     }
