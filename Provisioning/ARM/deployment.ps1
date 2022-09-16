@@ -14,7 +14,8 @@ param (
 $TemplateFile = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, $TemplateFile))
 $TemplateParametersFile = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, $TemplateParametersFile))
 
-#$DebugPreference = 'SilentlyContinue' #'Continue'
+# $DebugPreference = 'Continue' 'SilentlyContinue'
+$DebugPreference = 'SilentlyContinue'
 function Login ($SubscriptionId, $TenantId) {
     $context = Get-AzContext
 

@@ -1,0 +1,66 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "hubsubnetNames": {
+            "type": "array",
+            "defaultValue": [
+                "web",
+                "dat",
+                "app"
+            ]
+        },
+        "subnetprefix": {
+            "type": "string",
+            "defaultValue": "192.168.0.0/24"
+        }
+    },
+    "variables": {
+        "subnet-array-on-object": {
+            "copy": [
+                {
+                    "name": "subnets",
+                    "count": "[length(parameters('hubsubnetNames'))]",
+                    "input": {
+                        "name": "[concat(parameters('hubsubnetNames') )]",
+                        "subnetAddress": "[concat(parameters('subnetprefix'),copyIndex('subnets'))]",
+                        "subnetIndex": "[copyIndex('subnets')]"
+                    }
+                }
+            ]
+        },
+        "text1": "[split(split(parameters('subnetprefix'),'/')[0],'.')]",
+        "copy": [
+            {
+                "name": "top-level-object-array",
+                "count": "[length(parameters('hubsubnetNames'))]",
+                "input": {
+                    "name": "[concat('mySubnet', copyIndex('top-level-object-array', 1))]",
+                    "subnetAddress": "[concat(parameters('subnetprefix'),copyIndex('top-level-object-array'))]",
+                    "subnetIndex": "[copyIndex('top-level-object-array')]"
+                }
+            }
+        ]
+    },
+    "resources": [
+    ],
+    "outputs": {
+        "exampleObject": {
+            "value": "[variables('subnet-array-on-object')]",
+            "type": "object"
+        },
+        "exampleArrayOnObject": {
+            "value": "[variables('subnet-array-on-object').subnets]",
+            "type": "array"
+        },
+        "exampleArray": {
+            "value": "[variables('top-level-object-array')]",
+            "type": "array"
+        },
+        "test": {
+            "value": "[variables('text1')]",
+            "type": "array"
+        }
+
+    }
+}

@@ -37,6 +37,96 @@
         "HubResourcesCode": {
             "type": "string",
             "defaultValue": "hub"
+        },
+        "deployVpnGateway": {
+            "type": "bool",
+            "defaultValue": false
+        },
+        "vpnGateway": {
+            "type": "object",
+            "defaultValue": {
+                "name": "vgw-gateway",
+                "subnetName": "GatewaySubnet",
+                "subnetPrefix": "10.0.2.0/27",
+                "pipName": "pip-vgw-gateway",
+                "sku": "VpnGw1"
+            }
+        },
+        "bastionHost": {
+            "type": "object",
+            "defaultValue": {
+                "name": "AzureBastionHost",
+                "publicIPAddressName": "pip-bastion",
+                "subnetName": "AzureBastionSubnet",
+                "nsgName": "nsg-hub-bastion",
+                "subnetPrefix": "10.0.2.0/26"
+            }
+        },
+        "hubNetwork": {
+            "type": "object",
+            "defaultValue": {
+                "vnetName": "svc01",
+                "environment": "svc",
+                "addressPrefix": "10.0.0.0/22",
+                "subnetGwName": "GatewaySubnet",
+                "subnetGwPrefix": "10.0.1.0/27",
+                "subnetBstName": "AzureBastionSubnet",
+                "subnetBstPrefix": "10.0.2.0/26",
+                "subnetBstNsgName": "bst",
+                "subnetFwName": "AzureFirewallSubnet",
+                "subneFwPrefix": "10.0.3.0/26"
+            }
+        },
+        "spokeNetwork": {
+            "type": "object",
+            "defaultValue": {
+                "vnetName": "prd01",
+                "environment": "prd",
+                "addressPrefix": "10.100.0.0/16",
+                "subnet1Name": "web",
+                "subnet1Prefix": "10.100.1.0/24",
+                "subnet1NsgName": "nsg-spoke-one-resources",
+                "subnet2Name": "dat",
+                "subnet2Prefix": "10.100.2.0/24",
+                "subnet2NsgName": "nsg-spoke-two-resources",
+                "subnet3Name": "app",
+                "subnet3Prefix": "10.100.3.0/24",
+                "subnet3NsgName": "nsg-spoke-three-resources"
+            }
+        },
+        "spokeNetworkTwo": {
+            "type": "object",
+            "defaultValue": {
+                "vnetName": "uat01",
+                "environment": "uat",
+                "addressPrefix": "10.200.0.0/16",
+                "subnet1Name": "web",
+                "subnet1Prefix": "10.200.1.0/24",
+                "subnet1NsgName": "nsg-spoke-one-resources",
+                "subnet2Name": "dat",
+                "subnet2Prefix": "10.200.2.0/24",
+                "subnet2NsgName": "nsg-spoke-two-resources",
+                "subnet3Name": "app",
+                "subnet3Prefix": "10.200.3.0/24",
+                "subnet3NsgName": "nsg-spoke-three-resources"
+            }
+        },
+        "spokeNetworkThree": {
+            "type": "object",
+            "defaultValue": {
+                "vnetName": "dec01",
+                "environment": "dec",
+                "addressPrefix": "10.300.0.0/16",
+                "subnet1Name": "web",
+                "subnet1Prefix": "10.300.1.0/24",
+                "subnet1NsgName": "nsg-spoke-one-resources",
+                "subnet2Name": "dat",
+                "subnet2Prefix": "10.300.2.0/24",
+                "subnet2NsgName": "nsg-spoke-two-resources",
+                "subnet3Name": "app",
+                "subnet3Prefix": "10.300.3.0/24",
+                "subnet3NsgName": "nsg-spoke-three-resources"
+            }
         }
     },
     "variables": {
@@ -67,7 +157,45 @@
                 "count": "[length(parameters('appNames'))]",
                 "input": "[toLower(concat(variables('rgPrefix'),parameters('customer'),parameters('appNames')[copyIndex('ArrayRGEnv2')],parameters('location'),parameters('environment')[2],parameters('index')))]"
             }
-        ]
+        ],
+        "hubNetwork": {
+            "vnetName": "[concat(variables('vnetprefix'),variables('suffixName'),parameters('hubNetwork').vnetName)]",
+            "subnetBstName": "[Parameters('hubNetwork').subnetBstName]",
+            "subnetBstNsgName": "[concat(variables('aznsgPrefix'),variables('suffixName'),parameters('hubNetwork').subnetBstNsgName)]"
+        },
+        "spokeNetwork": {
+            "vnetName": "[concat(variables('vnetprefix'),variables('suffixName'),parameters('spokeNetwork').vnetName)]",
+            "subnet1Name": "[concat(variables('snetprefix'),variables('suffixName'),parameters('spokeNetwork').subnet1Name)]",
+            "subnet1NsgName": "[concat(variables('aznsgPrefix'),variables('suffixName'),parameters('spokeNetwork').subnet1Name)]",
+            "subnet2Name": "[concat(variables('snetprefix'),variables('suffixName'),parameters('spokeNetwork').subnet2Name)]",
+            "subnet2NsgName": "[concat(variables('aznsgPrefix'),variables('suffixName'),parameters('spokeNetwork').subnet2Name)]",
+            "subnet3Name": "[concat(variables('snetprefix'),variables('suffixName'),parameters('spokeNetwork').subnet3Name)]",
+            "subnet3NsgName": "[concat(variables('aznsgPrefix'),variables('suffixName'),parameters('spokeNetwork').subnet3Name)]"
+        },
+        "spokeNetworkTwo": {
+            "vnetName": "[concat(variables('vnetprefix'),variables('suffixName'),parameters('spokeNetworkTwo').vnetName)]",
+            "subnet1Name": "[concat(variables('snetprefix'),variables('suffixName'),parameters('spokeNetworkTwo').subnet1Name)]",
+            "subnet1NsgName": "[concat(variables('aznsgPrefix'),variables('suffixName'),parameters('spokeNetworkTwo').subnet1Name)]",
+            "subnet2Name": "[concat(variables('snetprefix'),variables('suffixName'),parameters('spokeNetworkTwo').subnet2Name)]",
+            "subnet2NsgName": "[concat(variables('aznsgPrefix'),variables('suffixName'),parameters('spokeNetworkTwo').subnet2Name)]",
+            "subnet3Name": "[concat(variables('snetprefix'),variables('suffixName'),parameters('spokeNetworkTwo').subnet3Name)]",
+            "subnet3NsgName": "[concat(variables('aznsgPrefix'),variables('suffixName'),parameters('spokeNetworkTwo').subnet3Name)]"
+        },
+        "spokeNetworkThree": {
+            "vnetName": "[concat(variables('vnetprefix'),variables('suffixName'),parameters('spokeNetworkThree').vnetName)]",
+            "subnet1Name": "[concat(variables('snetprefix'),variables('suffixName'),parameters('spokeNetworkThree').subnet1Name)]",
+            "subnet1NsgName": "[concat(variables('aznsgPrefix'),variables('suffixName'),parameters('spokeNetworkThree').subnet1Name)]",
+            "subnet2Name": "[concat(variables('snetprefix'),variables('suffixName'),parameters('spokeNetworkThree').subnet2Name)]",
+            "subnet2NsgName": "[concat(variables('aznsgPrefix'),variables('suffixName'),parameters('spokeNetworkThree').subnet2Name)]",
+            "subnet3Name": "[concat(variables('snetprefix'),variables('suffixName'),parameters('spokeNetworkThree').subnet3Name)]",
+            "subnet3NsgName": "[concat(variables('aznsgPrefix'),variables('suffixName'),parameters('spokeNetworkThree').subnet3Name)]"
+        },
+        "peering-name-hub-to-spoke-one": "[concat('peer',parameters('customer'),variables('hubNetwork').vnetName,'to',variables('spokeNetwork').vnetName)]",
+        "peering-name-hub-to-spoke-two": "[concat('peer',parameters('customer'),variables('hubNetwork').vnetName,'to',variables('spokeNetworkTwo').vnetName)]",
+        "peering-name-hub-to-spoke-three": "[concat('peer',parameters('customer'),variables('hubNetwork').vnetName,'to',variables('spokeNetworkThree').vnetName)]",
+        "peering-name-spoke-to-hub-one": "[concat('peer',parameters('customer'),variables('spokeNetwork').vnetName,'to',variables('hubNetwork').vnetName)]",
+        "peering-name-spoke-to-hub-two": "[concat('peer',parameters('customer'),variables('spokeNetworkTwo').vnetName,'to',variables('hubNetwork').vnetName)]",
+        "peering-name-spoke-to-hub-three": "[concat('peer',parameters('customer'),variables('spokeNetworkThree').vnetName,'to',variables('hubNetwork').vnetName)]"
     },
 
     "resources": [
@@ -91,7 +219,7 @@
             "resourceGroup": "[variables('rgInfraName')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Resources/resourceGroups',variables('rgInfraName'))]"
-                ],
+            ],
             "properties": {
                 "mode": "Incremental",
                 "template": {
@@ -103,7 +231,7 @@
                         {
                             "comments": "Log Analytics workspace",
                             "type": "Microsoft.OperationalInsights/workspaces",
-                            "apiVersion": "2020-03-01-preview",
+                            "apiVersion": "2021-12-01-preview",
                             "name": "[variables('loganalyticsWorkspaceName')]",
                             "location": "[parameters('location')]",
                             "properties": {
@@ -114,12 +242,126 @@
                                     "searchVersion": 1
                                 }
                             }
+                        },                       
+                        {
+                            "comments": "Hub virtual network and diagnostic configuration",
+                            "type": "Microsoft.Network/virtualNetworks",
+                            "apiVersion": "2020-05-01",
+                            "name": "[variables('hubNetwork').vnetName]",
+                            "location": "[parameters('location')]",
+                            "dependsOn": [
+                                //"[resourceId('Microsoft.OperationalInsights/workspaces', variables('loganalyticsWorkspaceName'))]"
+                            ],
+                            "properties": {
+                                "addressSpace": {
+                                    "addressPrefixes": [
+                                        "[parameters('hubNetwork').addressPrefix]"
+                                    ]
+                                },
+                                "subnets": [
+                                    {
+                                        "name": "[parameters('hubNetwork').subnetFwName]",
+                                        "properties": {
+                                            "addressPrefix": "[parameters('hubNetwork').subneFwPrefix]"
+                                        }
+                                    },
+                                    {
+                                        "name": "[parameters('hubNetwork').subnetBstName]",
+                                        "properties": {
+                                            "addressPrefix": "[parameters('hubNetwork').subnetBstPrefix]"
+                                        }
+                                    },
+                                    {
+                                        "name": "[parameters('vpnGateway').subnetName]",
+                                        "properties": {
+                                            "addressPrefix": "[parameters('hubNetwork').subnetGwPrefix]"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "comments": "Spoke virtual network, subnet, and diagnostic configuration",
+                            "type": "Microsoft.Network/virtualNetworks",
+                            "apiVersion": "2020-05-01",
+                            "name": "[variables('spokeNetwork').vnetName]",
+                            "location": "[parameters('location')]",
+                            "dependsOn": [
+                                //"[resourceId('Microsoft.Network/networkSecurityGroups', variables('spokeNetwork').subnet1NsgName)]"
+                                //"[resourceId('Microsoft.OperationalInsights/workspaces', variables('loganalyticsWorkspaceName'))]"
+                            ],
+                            "properties": {
+                                "addressSpace": {
+                                    "addressPrefixes": [
+                                        "[parameters('spokeNetwork').addressPrefix]"
+                                    ]
+                                },
+                                "subnets": [
+                                    {
+                                        "name": "[variables('spokeNetwork').subnet1Name]",
+                                        "properties": {
+                                            "addressPrefix": "[parameters('spokeNetwork').subnet1Prefix]"
+                                        }
+                                    },
+                                    {
+                                        "name": "[variables('spokeNetwork').subnet2Name]",
+                                        "properties": {
+                                            "addressPrefix": "[parameters('spokeNetwork').subnet2Prefix]"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "comments": "Spoke virtual network 2, subnet, and diagnostic configuration",
+                            "type": "Microsoft.Network/virtualNetworks",
+                            "apiVersion": "2020-05-01",
+                            "name": "[variables('spokeNetworkTwo').vnetName]",
+                            "location": "[parameters('location')]",
+                            "dependsOn": [
+                                //"[resourceId('Microsoft.Network/networkSecurityGroups', variables('spokeNetworkTwo').subnet1NsgName)]"
+                                //"[resourceId('Microsoft.OperationalInsights/workspaces', variables('loganalyticsWorkspaceName'))]"
+                            ],
+                            "properties": {
+                                "addressSpace": {
+                                    "addressPrefixes": [
+                                        "[parameters('spokeNetworkTwo').addressPrefix]"
+                                    ]
+                                },
+                                "subnets": [
+                                    {
+                                        "name": "[variables('spokeNetworkTwo').subnet2Name]",
+                                        "properties": {
+                                            "addressPrefix": "[parameters('spokeNetworkTwo').subnet2Prefix]"
+                                        }
+                                    }
+                                ]
+                            }
                         }
+/*
+                        {
+                            "comments": "Subnet for Bastion",
+                            "type": "Microsoft.Network/virtualNetworks/subnets",
+                            "apiVersion": "2020-05-01",
+                            "name": "[concat(variables('hubNetwork').vnetName, '/', variables('hubNetwork').subnetBstName)]",
+                            "dependsOn": [
+                                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('hubNetwork').subnetBstNsgName)]",
+                                "[resourceId('Microsoft.Network/virtualNetworks', variables('hubNetwork').vnetName)]"
+                            ],
+                            "properties": {
+                                "addressPrefix": "[parameters('hubNetwork').subnetBstPrefix]",
+                                "networkSecurityGroup": {
+                                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('hubNetwork').subnetBstNsgName)]"
+                                }
+                            }
+                        },
+*/                         
+
                     ],
                     "outputs": {}
                 }
             }
-        },        
+        },
         {
             "type": "Microsoft.Resources/resourceGroups",
             "apiVersion": "2020-06-01",
