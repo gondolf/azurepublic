@@ -1,0 +1,45 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "existingCustomScriptStorageAccountResourcegroup": {
+      "value": "arsgrycoinfeastusprd01"
+    },
+    "existingCustomScriptStorageAccountName": {
+      "value": "staccycoinfeastusprd01"
+    },
+    "existingvirtualNetworkName": {
+      "value": "avnetyeceu1uat01"
+    },
+    "existingVirtualNetworkresourcegroup": {
+      "value": "arsgrycoinfeastusprd01"
+    },
+    "existingsubnetName": {
+      "value": "asnetwebuat01"
+    },
+    "existingBootDiagnostic": {
+      "value": "vdiagyecj6eu1prd02"
+    },
+    "adminUsername": {
+      "value": "kndadmin"
+    },
+    "adminPassword": {
+      "value": "MySuperSecretKey$2022"
+    },
+    "_artifactsLocationSasToken": {
+      "value": ""
+    },
+    "domainName": {
+      "value": "corp.geedomain01.com"
+    },
+    "dnsPrefix": {
+      "value": "geedomain01"
+    },
+    "_artifactsLocation": {
+      "value": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/application-workloads/active-directory/active-directory-new-domain/"
+    },
+    "urltemplatespath": {
+      "value": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/application-workloads/active-directory/active-directory-new-domain/"
+    }
+  }
+}

@@ -228,8 +228,8 @@
         }
     },
     "variables": {
-        "urlvnettemplate": "[concat(parameters('urltemplatespath'),'vnet.json')]",
-        "urlvnetwithdnstemplate": "[concat(parameters('urltemplatespath'),'vnet-with-dns-server.json')]"
+        "urlvnettemplate": "[concat(parameters('urltemplatespath'),'nestedtemplates/vnet.json')]",
+        "urlvnetwithdnstemplate": "[concat(parameters('urltemplatespath'),'nestedtemplates/vnet-with-dns-server.json')]"
     },
     "resources": [
         {
@@ -433,7 +433,7 @@
                         "typeHandlerVersion": "2.19",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                            "ModulesUrl": "[uri(parameters('_artifactsLocation'), concat('scripts/DSC/CreateADPDC.zip', parameters('_artifactsLocationSasToken')))]",
+                            "ModulesUrl": "[uri(parameters('_artifactsLocation'), concat('DSC/CreateADPDC.zip', parameters('_artifactsLocationSasToken')))]",
                             "ConfigurationFunction": "CreateADPDC.ps1\\CreateADPDC",
                             "Properties": {
                                 "DomainName": "[parameters('domainName')]",

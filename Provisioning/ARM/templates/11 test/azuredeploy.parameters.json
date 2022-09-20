@@ -2,19 +2,18 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "hubNetwork": {
-            "value": {
-                "vnetName": "svc01",
-                "environment": "svc",
-                "addressPrefix": "10.0.0.0/22",
-                "subnetGwName": "GatewaySubnet",
-                "subnetGwPrefix": "10.0.1.0/27",
-                "subnetBstName": "AzureBastionSubnet",
-                "subnetBstPrefix": "10.0.2.0/26",
-                "subnetBstNsgName": "bst",
-                "subnetFwName": "AzureFirewallSubnet",
-                "subneFwPrefix": "10.0.3.0/26"
-            }
-        }
+"hubsubnetNames": {
+    "value": [
+        "web",
+        "dat",
+        "app"
+    ]
+},
+"name": {
+    "value": "John Dole"
+},
+"subnetprefix": {
+    "value": "192.168.0.0/24"
+}
     }
 }

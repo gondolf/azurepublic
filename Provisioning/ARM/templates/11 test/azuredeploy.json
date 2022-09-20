@@ -13,6 +13,14 @@
         "subnetprefix": {
             "type": "string",
             "defaultValue": "192.168.0.0/24"
+        },
+        "name": {
+            "type": "string",
+            "defaultValue": "\\\"John Dole\\\""
+        },
+        "utcValue": {
+            "type": "string",
+            "defaultValue": "[utcNow()]"
         }
     },
     "variables": {
@@ -43,6 +51,30 @@
         ]
     },
     "resources": [
+        
+        {
+            "type": "Microsoft.Resources/deploymentScripts",
+            "apiVersion": "2020-10-01",
+            "name": "runPowerShellInlineWithOutput",
+            "location": "[resourceGroup().location]",
+            "kind": "AzurePowerShell",
+            "properties": {
+                "forceUpdateTag": "[parameters('utcValue')]",
+                "azPowerShellVersion": "6.4",
+                "scriptContent": "
+          param([string] $name)
+          $output = \"Hello {0}\" -f $name
+          Write-Output $output
+          $DeploymentScriptOutputs = @{}
+          $DeploymentScriptOutputs['text'] = $output
+        ",
+                "arguments": "[concat('-name', ' ', parameters('name'))]",
+                "timeout": "PT1H",
+                "cleanupPreference": "OnSuccess",
+                "retentionInterval": "P1D"
+            }
+        }
+        
     ],
     "outputs": {
         "exampleObject": {
@@ -60,6 +92,11 @@
         "test": {
             "value": "[variables('text1')]",
             "type": "array"
+        },
+        
+        "result": {
+            "value": "[reference('runPowerShellInlineWithOutput').outputs.text]",
+            "type": "string"
         }
 
     }

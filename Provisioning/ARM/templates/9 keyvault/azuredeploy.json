@@ -20,7 +20,7 @@
             "metadata": {
                 "description": "User name for the Virtual Machine."
             }
-        },        
+        },
         "keyVaultSuffix": {
             "type": "string",
             "metadata": {
@@ -75,6 +75,7 @@
         },
         "objectId": {
             "type": "string",
+            "defaultValue": "0a7116cc-5a9f-4983-83ff-2dd8d7f91150",
             "metadata": {
                 "description": "Specifies the object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies. Get it by using Get-AzADUser or Get-AzADServicePrincipal cmdlets."
             }
@@ -123,16 +124,17 @@
         }
     },
     "resources": [
+
         {
             "type": "Microsoft.KeyVault/vaults",
-            "apiVersion": "2021-04-01-preview",
+            "apiVersion": "2022-07-01",
             "name": "[variables('keyVault')]",
             "location": "[parameters('location')]",
             "properties": {
                 "enabledForDeployment": "[parameters('enabledForDeployment')]",
                 "enabledForDiskEncryption": "[parameters('enabledForDiskEncryption')]",
                 "enabledForTemplateDeployment": "[parameters('enabledForTemplateDeployment')]",
-                "enableRbacAuthorization": true,
+                "enableRbacAuthorization": false,
                 "tenantId": "[parameters('tenantId')]",
                 "sku": {
                     "name": "[parameters('skuName')]",
@@ -141,7 +143,64 @@
                 "networkAcls": {
                     "defaultAction": "Allow",
                     "bypass": "AzureServices"
-                }
+                },
+                "accessPolicies": [
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/accessPolicies",
+            "name": "[concat(variables('keyvault'), '/add')]",
+            "apiVersion": "2019-09-01",
+            "properties": {
+                "accessPolicies": [
+                    {
+                        "tenantId": "[subscription().tenantId]",
+                        "objectId": "[parameters('objectId')]",
+                        "permissions": {
+                            "keys": [
+                                "Get",
+                                "List",
+                                "Update",
+                                "Create",
+                                "Import",
+                                "Delete",
+                                "Recover",
+                                "Backup",
+                                "Restore",
+                                "GetRotationPolicy",
+                                "SetRotationPolicy",
+                                "Rotate"
+                            ],
+                            "secrets": [
+                                "Get",
+                                "List",
+                                "Set",
+                                "Delete",
+                                "Recover",
+                                "Backup",
+                                "Restore"
+                            ],
+                            "certificates": [
+                                "Get",
+                                "List",
+                                "Update",
+                                "Create",
+                                "Import",
+                                "Delete",
+                                "Recover",
+                                "Backup",
+                                "Restore",
+                                "ManageContacts",
+                                "ManageIssuers",
+                                "GetIssuers",
+                                "ListIssuers",
+                                "SetIssuers",
+                                "DeleteIssuers"
+                            ]
+                        }
+                    }
+                ]
             }
         },
         {
@@ -149,12 +208,16 @@
             "apiVersion": "2021-04-01-preview",
             "name": "[format('{0}/{1}', variables('keyVault'), parameters('secretName'))]",
             "properties": {
-                "value": "[parameters('secretValue')]"
+                "value": "[parameters('secretValue')]",
+                "attributes": {
+                    "enabled": true
+                }
             },
             "dependsOn": [
                 "[resourceId('Microsoft.KeyVault/vaults', variables('keyVault'))]"
             ]
-        },
+        }
+        /*
         {
             "type": "Microsoft.Authorization/roleAssignments",
             "apiVersion": "2020-04-01-preview",
@@ -169,6 +232,7 @@
                 "[resourceId('Microsoft.KeyVault/vaults', variables('keyvault'))]"
             ]
         }
+        */
     ],
     "outputs": {
         "secretUri": {
