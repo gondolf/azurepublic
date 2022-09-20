@@ -2,12 +2,13 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "location": {
-      "type": "string",
-      "metadata": {
-        "description": "Azure region that supports Availability Zones"
-      }
-    },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources."
+            }
+        },
     "namePrefix": {
       "type": "string",
       "minLength": 3,
@@ -26,6 +27,7 @@
     "sqlVMImage": {
       "type": "string",
       "allowedValues": [
+        "SQL2017-WS2019",
         "SQL2016SP1-WS2016",
         "SQL2016SP1-WS2016-BYOL",
         "SQL2017-WS2016",

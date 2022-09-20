@@ -1,8 +1,8 @@
 param (
-    [Parameter(Mandatory = $false)] [String]  $TenantId = "3617ef9b-98b4-40d9-ba43-e1ed6709cf0d",
-    [Parameter(Mandatory = $false)] [String]  $Subscriptionid = "964df7ca-3ba4-48b6-a695-1ed9db5723f8",
-    [Parameter(Mandatory = $false)] [String]  $ResourceGroupName = "$((Get-AzResourceGroup).ResourceGroupName)", # Only for Resourcegroup deployments
-    [Parameter(Mandatory = $false)] [String]  $WorkingDirectory = ".\templates\11 test\",
+    [Parameter(Mandatory = $false)] [String]  $TenantId = "22b6965d-ac5b-454f-b299-07eb1c872a48",
+    [Parameter(Mandatory = $false)] [String]  $Subscriptionid = "b10fde16-9cd6-45cc-96af-8d329736b2cc",
+    [Parameter(Mandatory = $false)] [String]  $ResourceGroupName = "$((Get-AzResourceGroup)[0].ResourceGroupName)", # Only for Resourcegroup deployments
+    [Parameter(Mandatory = $false)] [String]  $WorkingDirectory = ".\templates\12 sql-alwayson-md-ilb-zones\",
     [Parameter(Mandatory = $false)] [string]  $TemplateFile = $WorkingDirectory + "\azuredeploy.json",
     [Parameter(Mandatory = $false)] [String]  $TemplateParameterFile = $WorkingDirectory + "\azuredeploy.parameters.json",
     [Parameter(Mandatory = $false)] [switch]  $SubscriptionDeployment ,

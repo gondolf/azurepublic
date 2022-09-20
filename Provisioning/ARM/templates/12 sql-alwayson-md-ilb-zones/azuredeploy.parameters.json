@@ -2,35 +2,44 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "location": {
-      "value": "GET-PREREQ-location"
-    },
     "namePrefix": {
-      "value": "GEN-UNIQUE-8"
+      "value": "alwayson"
     },
     "existingDomainName": {
-      "value": "GET-PREREQ-domainName"
+      "value": "corp.geedomain01.com"
     },
     "adminUsername": {
-      "value": "quickstarts"
+      "value": "kndadmin"
     },
     "adminPassword": {
-      "reference": "GEN-KEYVAULT-PASSWORD-REFERENCE"
+      "value": "MySuperSecretKey$2022"
     },
     "sqlServiceAccount": {
-      "value": "GEN-UNIQUE"
+      "value": "sqladmin"
     },
     "sqlServicePassword": {
-      "value": "GEN-PASSWORD"
+      "value": "MySuperSecretKey$2022"
     },
     "existingVirtualNetworkName": {
-      "value": "GET-PREREQ-virtualNetworkName"
+      "value": "adVNET"
     },
     "existingVirtualNetworkRGName": {
-      "value": "GET-PREREQ-virtualNetworkResourceGroupName"
-    },    
+      "value": "sqldemo01"
+    },
     "existingSubnetName": {
-      "value": "GET-PREREQ-virtualNetworkSubnetName"
+      "value": "adSubnet"
+    },
+    "sqlVMImage": {
+        "value": "SQL2017-WS2019"
+    },
+    "vmCount": {
+        "value": 3
+    },
+    "vmSize": {
+        "value": "Standard_D2s_v3"
+    },
+    "_artifactsLocation": {
+      "value": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/demos/sql-alwayson-md-ilb-zones/"
     }
   }
 }

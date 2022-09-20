@@ -4,40 +4,30 @@
   "parameters": {
     "existingCustomScriptStorageAccountResourcegroup": {
       "value": "arsgrycoinfeastusprd01"
-    },    
+    },
     "existingCustomScriptStorageAccountName": {
       "value": "staccycoinfeastusprd01"
-    },    
+    },
     "existingvirtualNetworkName": {
       "value": "avnetyeceu1uat01"
     },
     "existingVirtualNetworkresourcegroup": {
-      "value": "arsgrycoinfeastusprd01"
+      "value": "sqldemo01"
     },
     "existingsubnetName": {
-      "value": "asnetwebuat01" 
+      "value": "asnetwebuat01"
     },
     "existingBootDiagnostic": {
       "value": "vdiagyecj6eu1prd02"
-    },        
+    },
     "adminUsername": {
       "value": "kndadmin"
     },
     "adminPassword": {
-      "reference": {
-        "keyVault": {
-          "id": "/subscriptions/964df7ca-3ba4-48b6-a695-1ed9db5723f8/resourceGroups/1-99e8c8c0-playground-sandbox/providers/Microsoft.KeyVault/vaults/demogeeadds01"
-        },
-          "secretName": "kndadmin"
-      }
+      "value": "MySuperSecretKey$2022"
     },
     "_artifactsLocationSasToken": {
-      "reference": {
-        "keyVault": {
-          "id": "/subscriptions/964df7ca-3ba4-48b6-a695-1ed9db5723f8/resourceGroups/1-99e8c8c0-playground-sandbox/providers/Microsoft.KeyVault/vaults/demogeeadds01"
-        },
-          "secretName": "scripts"
-      }
+      "value": ""
     },
     "domainName": {
       "value": "corp.geedomain01.com"
@@ -46,10 +36,10 @@
       "value": "geedomain01"
     },
     "_artifactsLocation": {
-        "value": "https://demogeead01.blob.core.windows.net/scripts"
+      "value": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/application-workloads/active-directory/active-directory-new-domain/"
     },
-    "urltemplatespath":{
-      "value": "https://raw.githubusercontent.com/Azure/AzureStack-QuickStart-Templates/master/active-directory-new-domain/nestedtemplates/"
+    "urltemplatespath": {
+      "value": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/application-workloads/active-directory/active-directory-new-domain/"
     }
   }
 }
