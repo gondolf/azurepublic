@@ -129,7 +129,7 @@
         "Yes",
         "No"
       ],
-      "defaultValue": "No",
+      "defaultValue": "Yes",
       "metadata": {
         "description": "Enable outbound Internet access via source NAT to support ongoing VM Agent extension communication needs"
       }

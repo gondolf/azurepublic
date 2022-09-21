@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "namePrefix": {
-      "value": "alwayson"
+      "value": "demo2"
     },
     "existingDomainName": {
       "value": "corp.geedomain01.com"
@@ -15,7 +15,7 @@
       "value": "MySuperSecretKey$2022"
     },
     "sqlServiceAccount": {
-      "value": "sqladmin"
+      "value": "sqluser"
     },
     "sqlServicePassword": {
       "value": "MySuperSecretKey$2022"
@@ -30,7 +30,7 @@
       "value": "adSubnet"
     },
     "sqlVMImage": {
-        "value": "SQL2017-WS2019"
+        "value": "SQL2016SP1-WS2016"
     },
     "vmCount": {
         "value": 3

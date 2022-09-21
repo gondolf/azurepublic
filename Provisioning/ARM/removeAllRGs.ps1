@@ -1,5 +1,5 @@
 #Use a filter to select resource groups by substring
-$filter = 'company'
+$filter = 'sqldemo'
  
 #Find Resource Groups by Filter -> Verify Selection
 $selectedResourceGroups = Get-AzResourceGroup | ? ResourceGroupName -match $filter | Select-Object ResourceGroupName
@@ -40,6 +40,6 @@ Write-Output $TemplateObject
 Write-Output "Starting loop" 
 foreach ($g in $selectedResourceGroups.ResourceGroupName) {
     Write-Output "ResourceGroupName: $($g)"
-    # New-AzResourceGroupDeployment -Name PurgeResourceGroup -ResourceGroupName $($g) -TemplateObject $emptyARMTemplate -Mode Complete -Force
-    Remove-AzResourceGroup -Name $g -Force 
+    New-AzResourceGroupDeployment -Name PurgeResourceGroup -ResourceGroupName $($g) -TemplateObject $emptyARMTemplate -Mode Complete -Force
+    # Remove-AzResourceGroup -Name $g -Force 
 }

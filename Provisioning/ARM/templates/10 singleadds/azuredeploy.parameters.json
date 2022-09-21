@@ -12,7 +12,7 @@
       "value": "avnetyeceu1uat01"
     },
     "existingVirtualNetworkresourcegroup": {
-      "value": "sqldemo01"
+      "value": "sqldemo02"
     },
     "existingsubnetName": {
       "value": "asnetwebuat01"

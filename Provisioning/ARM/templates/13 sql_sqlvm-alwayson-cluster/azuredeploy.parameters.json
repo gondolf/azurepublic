@@ -1,0 +1,79 @@
+{  
+   "$schema":"https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+   "contentVersion":"1.0.0.0",
+   "parameters":{  
+      "adminUsername":{  
+         "value":"alwaysonadmin"
+      },
+      "adminPassword":{  
+         "value":"MySuperSecretKey$2022"
+      },
+      "sqlServerServiceAccountUserName":{  
+         "value":"sqlservice"
+      },
+      "sqlServerServiceAccountPassword":{  
+         "value":"MySuperSecretKey$2022"
+      },
+      "sqlStorageAccountType":{  
+         "value":"Premium_LRS"
+      },
+      "dcStorageAccountType":{  
+         "value":"Standard_LRS"
+      },
+      "sqlStorageAccountName":{  
+         "value":"sqlgeedemo669"
+      },
+      "dcStorageAccountName":{  
+         "value":"dcgeedemo669"
+      },
+      "adVMSize":{  
+         "value": "Standard_D2s_v3"
+      },
+      "sqlVMSize":{  
+         "value": "Standard_D2s_v3"
+      },
+      "witnessVMSize":{  
+         "value": "Standard_D2s_v3"
+      },
+      "domainName":{  
+         "value":"contoso.local"
+      },
+      "virtualNetworkAddressRange":{  
+         "value":"10.0.0.0/16"
+      },
+      "staticSubnet":{  
+         "value":"10.0.0.0/24"
+      },
+      "sqlSubnet":{  
+         "value":"10.0.1.0/26"
+      },
+      "autoPatchingDay":{  
+         "value":"Sunday"
+      },
+      "autoPatchingStartHour":{  
+         "value":"2"
+      },
+      "sqlAOAGName":{  
+         "value":"SQLCLU"
+      },
+      "sqlAOListenerPort":{  
+         "value":"1433"
+      },
+      "sqlAOListenerName":{  
+         "value":"SQLLISTENER"
+      },
+      "sqlServerVersion":{  
+         "value":"SQL2014SP2-WS2012R2"
+      },
+      "numberOfSqlVMDisks":{  
+         "value":"2"
+      },
+      "workloadType":{  
+         "value":"GENERAL"
+      },
+      "_artifactsLocation": {
+          "value": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/application-workloads/sql/sqlvm-alwayson-cluster/" 
+      }
+   }
+}
+
