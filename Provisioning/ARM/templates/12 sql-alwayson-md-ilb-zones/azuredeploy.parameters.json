@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "namePrefix": {
-      "value": "demo2"
+      "value": "demo3"
     },
     "existingDomainName": {
       "value": "corp.geedomain01.com"
@@ -30,13 +30,13 @@
       "value": "adSubnet"
     },
     "sqlVMImage": {
-        "value": "SQL2016SP1-WS2016"
+      "value": "SQL2017-WS2019"
     },
     "vmCount": {
-        "value": 3
+      "value": 2
     },
     "vmSize": {
-        "value": "Standard_D2s_v3"
+      "value": "Standard_D2s_v3"
     },
     "_artifactsLocation": {
       "value": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/demos/sql-alwayson-md-ilb-zones/"

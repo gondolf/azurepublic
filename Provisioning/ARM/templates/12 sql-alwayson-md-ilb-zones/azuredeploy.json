@@ -43,7 +43,7 @@
        "metadata": {
             "description": "SQL Image Sku"
         },
-        "defaultValue": "SQLDEV"
+        "defaultValue": "sqldev"
     },
     "vmCount": {
       "type": "int",

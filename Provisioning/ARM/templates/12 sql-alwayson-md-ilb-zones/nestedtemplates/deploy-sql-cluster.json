@@ -7,7 +7,7 @@
             "metadata": {
                 "description": "Location for the VM, only certain regions support zones during preview."
             }
-        },  
+        },
         "namePrefix": {
             "type": "string",
             "minLength": 3,
@@ -105,11 +105,11 @@
         },
         "imageOffer": {
             "type": "string",
-            "defaultValue": "SQL2016SP1-WS2016"
+            "defaultValue": "SQL2017-WS2019"
         },
         "imageSKU": {
             "type": "string",
-            "defaultValue": "Enterprise"
+            "defaultValue": "sqldev"
         },
         "imageVersion": {
             "type": "string",
@@ -158,7 +158,7 @@
         "agProbePort": 59999,
         "snatTcpPort": 59998,
         "snatProbePort": 3389,
-        "zones": ["1","2","3"]
+        "zones": [ "1", "2", "3" ]
     },
     "resources": [
         {
@@ -320,7 +320,7 @@
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
                                 "id": "[parameters('subnetId')]"
-                            },           
+                            },
                             "primary": true
                         }
                     },
