@@ -1,4 +1,4 @@
-#Powershell 7
+#Requires -Version 7
 <#
 .SYNOPSIS
 This script performs XYZ operations.
