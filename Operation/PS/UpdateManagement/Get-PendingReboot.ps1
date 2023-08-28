@@ -1,3 +1,22 @@
+<#
+.SYNOPSIS
+This script performs XYZ operations.
+
+.DESCRIPTION
+This script does...
+
+.NOTES
+File Name      : Get-PendingReboot.ps1
+Author         : Gonzalo Escajadillo
+Prerequisite   : Windows PowerShell 7
+Copyright 2023 - Kyndryl
+
+.LINK
+Script Source: https://github.com/yourusername/yourrepo
+
+#Requires -Version 7.0
+#>
+
 #----------------------------------------------------------[Parameters]-----------------------------------------------------------
 param (
     [Parameter(Mandatory = $false)] [String]  $resourceId = "/subscriptions/8bacf08c-ed66-4a7f-9c82-af1ce9a68cce/resourceGroups/rgumcdemo01/providers/Microsoft.Compute/virtualMachines/vmlnx1",
