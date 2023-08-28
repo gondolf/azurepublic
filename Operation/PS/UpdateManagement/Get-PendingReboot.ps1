@@ -1,3 +1,4 @@
+# Powershell 7
 <#
 .SYNOPSIS
 This script performs XYZ operations.
